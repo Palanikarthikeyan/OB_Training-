@@ -1,0 +1,85 @@
+Project: Attendance Tracking system
+
+1. Requirement Gathering & Analysis 
+
+    1.1  Functional Requirements 
+         -------------------------
+          Mark attendance 
+          biometric + QR Scan ..
+          Late ; absent ->payroll (emp)
+	  ...
+
+    1.2  Non-Functional Requirements 
+         ----------------------------
+	 Data security 
+         Time index - accuracy 
+       
+   Result/Outcome: _______________
+
+
+2. Design 
+   1. High Level
+       Architecture : WebApp + Mobile App + flow 
+       Modules:
+           ->Login module 
+           ->Attendance module 
+           ->Leave 
+          ..
+           -> Admin module ->view (dashboard) Vs ->user module ->dashboard
+
+   2. Low Level
+	-> Data Base design
+             student/employee(user)
+             attendance - logs
+             dept..
+        -> API
+        -> UI 
+	
+3. Development 
+    FrontEnd
+    BackEnd
+    DB
+    Device integration 
+
+4. Testing
+    Unit Testing - test each module
+    Integration Testing 
+    System Testing - Complete work flow
+    Performance 
+    UAT
+    -----------------------//
+5. Deployment 
+    ----------------// Move to Production 
+6. Maintenance 
+--------------------------------------------------------------------------
+Agile roles
+
+PO
+SM
+DT
+
+Sprint-1 (2 weeks)
+---------------------
+Login
+UI
+Attendance UI
+..
+
+Sprint-2
+-----------
+Attendance + API
+Device Integration
+
+Sprint-3
+------------
+Leave update
+ ..
+
+Sprint-4
+-------------
+Export to Excel/PDF
+|
+Visualization 
+  |->Dashboard 
+
+============================================================================================================
