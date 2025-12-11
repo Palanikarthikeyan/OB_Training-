@@ -1,0 +1,353 @@
+Linux
+------
+About Linux
+Linux Architecture 
+Linux essential commands 
+
+----------
+What is an os ?
+OS - system software - interface between user and hardware
+
+ +------------------------+
+ | User : Applications 
+ +------------------------+
+ | OS
+ +------------------------+
+ | H/W: CPU RAM HD IO NIC 
+ +------------------------+
+
+ Kernel - Core part of an OS
+
+Before Unix => 
+
+  OS -> H/W dependent 
+     -> There is no multitask 
+
+1945..
+....
+Telecom + embedded 
+
+OS-X    OS-Y    101010101
+|        |        |
+X10     X11   .. X12
+
+Vision: Portable OS 
+        --------
+1950..
+OS-X
+--------
+|-> X10 X11 X12 .. X86 ...
+
+001011 --> PDP11 PDP12
+
+BCPL ->B -->OS - 1969
+       |
+       B+ ==>OS ===>Unix
+      ----//C   ---------1971/72 
+
+Ken Thompson
+Dennis Ritchie 
+|
+Brain Kernighan
+-------------------------------------
+R&D..
+Unix like OS
+HP-UX
+AIX
+Solaris 
+BSD
+..
+GNUProject   - 1983
+--------------
+Richard Stallman (RMS)
+|
+FSF
+|==> gcc gdb make bash ...
+
+minix  - 1987 
+-----
+  |-> Andrew Tanenbaum 
+  |-> education  
+
+Linus Tovalds - 1991
+-------------
+|->Kernel 
+|->Contributed to GNUProject => GNULinux
+|-->Linux - Kernel 
+
+GNU ->User Tools ,libraries , compilers ,shell,utilities 
+Linux ->Kernel 
+
+GNU+Linux = OS
+
+ +------------------------+
+ | User : Applications - User Tools ,libraries , compilers ,shell,utilities
+ +------------------------+
+ | OS (Kernel)
+ +------------------------+
+ | H/W: CPU RAM HD IO NIC 
+ +------------------------+
+
+GNU/Linux Distributors
+-------------------------
+Ubuntu
+Debian
+RedHat(RHEL)
+Fedora
+Oracle Linux 
+Linux Mint
+Kali Linux
+..
+
+Tools + Linux(Kernel) => OS
+
+For Example
+-------------
+Ubuntu OS =>  whoami -->karthik   ;  whoami is a command - login command
+RHL ------>   whoami -->karthik   ; whoami is a command - login command
+
+Ubuntu OS => Install webserver => apt install apache2
+RHL       => Install webserver => dnf install httpd
+
+------------------------------------------------------------------------------------------------------
+1. OS Vs Kernel
+
+2. Unix Vs Linux
+
+3. RedHat Vs Ubuntu 
+
+-------------------------------------------------------------------------------------------
+Unix/Linux - File , Process
+
+|||||
+-------
+ Kernel - File,Process
+-------
+|||||
+
+File - Data - Stored in Storage device (HD;SSD)
+====   -----  =========================
+			|-->Holding the data
+
+Process - Data - Under the CPU
+========  ----   ---------=====
+                            |->1. Fetch the data from memory
+			    |->2. Stores the data in CPU Register 
+			    |->3. Execute the data //Process
+
+
+
+User :  date 
+-------
+Kernel : date - file ; process
+
+
+ +------------------------+
+ | User : Applications - User Tools ,libraries , compilers ,shell,utilities
+ +---------------------------//Shell----------------------+
+	 |
+	[systemcall] 
+	 |
+	[FileSystem] <---> PCB |IPC;Sched;Net;Memory|
+	 |
+	[Device Driver]
+	 |
+	[Device Controllers]
+	 |
+ +------------------------------------------------------+
+ | H/W: CPU RAM HD IO NIC 
+ +------------------------+
+
+Shell - Interface between User and Kernel 
+-----
+  |--->Commandline Interface (CLI)
+
+
+
+Unix -> BourneShell(sh)
+        KornShell (ksh)
+
+GNU ---> BourneAgainShell - BASH <-- default shell in Linux 
+--------------------------------------------------------------------------------------------------
++------------------------+
+ | User : Applications - User Tools ,libraries , compilers ,shell,utilities
+ +---------------------------//Shell----------------------+
+	 |
+	[systemcall] (ex: open() read() write() ... fx() = FD (FileDescriptor - int)
+         |             FD = 0 <STDIN> ; FD = 1 Monitor(STDOUT) ; FD = 2 Monitor(STDERR)
+         |             FD = 0x1234 - memory releated 
+	 |	       FD = -1 <==Failed Call   
+	 |            
+	[FileSystem] <---> PCB |IPC;Sched;Net;Memory|
+	 |
+	[Device Driver]
+	 |
+	[Device Controllers]
+	 |
+ +------------------------------------------------------+
+ | H/W: CPU RAM HD IO NIC 
+ +------------------------+
+====================================================================================================
+
+
+karth@paka MINGW64 ~$
+----------------------//primary prompt
+
+Directory -->Folder 
+---------
+
+To create a directory 
+------------------------
+Syntax:-
+--------
+mkdir <directoryName>
+.....  -------------
+
+Ex: mkdir sales
+    mkdir prod QA HR Devops
+
+To change the directory
+-----------------------
+Syntax:-
+---------
+cd <directoryName>
+... -------------------
+cd sales
+cd prod
+
+L1/
+  |_L2/
+     |__L3/
+
+mkdir -p L1/L2/L3
+
+ls
+
+ls <directory>
+
+----------------------------
+All the linux commands are binary file - executable file - user can't understand the content
+/bin
+/usr/bin
+
+ls
+ps
+whoami
+pwd
+..
+
+ls
+ls -R
+
+mkdir -p L1/L2/L3
+
+-R <-- option
+-p <-- option
+
+command -option(s)
+	 --------
+	  |->more specific results
+
+POSIX-IEEE
+
+whatis <command>
+------
+
+
+man <command>
+--- ==========
+
+
+karth@paka MINGW64 ~/sales
+$ ls
+accounts/  prod/  qa/
+
+karth@paka MINGW64 ~/sales
+$ cd accounts
+
+karth@paka MINGW64 ~/sales/accounts
+$ mkdir D1 D2 D3
+
+karth@paka MINGW64 ~/sales/accounts
+$ cd ..
+
+karth@paka MINGW64 ~/sales
+$ ls accounts
+D1/  D2/  D3/
+
+cp -r OldDirectory NewDirectory
+
+karth@paka MINGW64 ~/sales
+$ cp -r accounts finance
+
+
+karth@paka MINGW64 ~/sales
+$
+--------------------------------------------------
+Regualr File 
+
+1. vi editor - commandline editor 
+   ---------
+
+ vi filename <-- (step - 1) {Enter}
+
+ +-----------------------------+
+ |
+ |   press 'i' <== (step -2) 
+ |
+ |   then type your input/text (step - 3)
+ |
+ |   press - ESC :wq (step - 4)
+ +-----------------------------+
+
+
+2.  ls
+emp.csv
+
+3. cat emp.csv # read only command - read the file content
+
+
+-------------
+grep - command
+----
+ |->search a pattern from inputFile
+   ==================
+
+grep -option pattern inputFile
+----  ====== ------- -------------
+ -i <== ignore pattern case
+
+--------------------------------------------------------------------
+
+A = 10+20 
+B = A + 5 
+C = B + 3
+display C 
+
+A|B|C
+    |-->final result 
+
+
+grep sales emp.csv <---  Single Process
+
+cat emp.csv | grep sales <== Two Process
+	      -----------
+
+
+less filename - page view
+--------------  ==========
+PageUp PageDown Home End
+q <-- quit
+
+
+head
+tail
+less
+-----// To view file content (or) command results are multiple lines /pages 
+
+
+command|head
+command|tail
+
+command|less
+----------------------------------------------------------------------------------------
