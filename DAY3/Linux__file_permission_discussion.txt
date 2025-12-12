@@ -1,0 +1,578 @@
+Recap
+------
+Linux 
+|->Kernel - File, Process
+   
+|->Commands 
+     |->executable binary file 
+     
+    /bin	- internal commands 
+    /usr/bin    - external commands 
+    /sbin	- admin commands  ----->executed by root user only - superuser/admin 
+
+
+userA@host~]$  ls   ps  date  whoami ... 
+--------------
+ |->primary prompt
+
+userA@host~]$ gdb file
+		|
+	command gdb not found
+	---------------------
+Install gdb //using package management - will install gdb command
+
+/usr/bin/gdb 
+==========================================================================================
+Linux File structure  - tree structure  
+--------------------
+
+			/ <== root directory - like MyComputer 
+			|
+    ----------------------------------------------------- ------
+    |		|	  |	 |	|	|	|     ...
+   /bin        /sbin     /root  /home   /etc   /var    /proc    <== Sub-Directory
+
+
+/bin
+/usr/bin
+/sbin
+--------------//binary files - commands - user can't read these binary files
+
+
+/root -- root user (admin) login path
+
+/home/ - non-root user login path
+
+/etc - Configuration files 
+
+/var/
+    |->log/    -- log 
+    |->mail/
+    
+/proc - virtual files - process info - current state of kernel 
+..
+/dev - device files
+
+ls /
+..
+
+pwd
+/home/admin/sales/
+ls
+emp.csv
+-------
+/home/admin/sales/emp.csv
+|
+starts from / directory => absolute path
+
+./sales/emp.csv
+--- //relative path
+
+./ -->current directory 
+../ -->parent directory 
+
+wc -l emp.csv
+
+-------------------------------------------------------------------------------------------
+vi filename
+cat filename
+
+userA@host~]$ mkdir Demo
+
+userA@host~]$ cd Demo
+
+userA@host Demo]$ pwd
+/home/userA/Demo
+
+userA@host Demo]$ vi sample.txt {Enter}
+
+Hello
+:wq 
+userA@host Demo]$ ls
+sample.txt
+
+userA@host Demo]$ cat sample.txt
+Hello
+
+userA@host Demo]$ 
+
+
+ /
+ |
+ home/
+   |___userA/
+         |___Demo/
+                |-->sample.txt
+
+-------------------------------------------------------------------------------------------
+File Permission
+=================
+File (F)
+=========
+   |---> handled by 3 users 
+	 	    ---------
+		     1. user (or) owner (or) author (or) login user
+		     2. group - collection of users
+		     3. others 
+
+
+
++-----------+		+--------------+      +------------+
+| sales	    |		|   prod       |      |    HR      |   <== Group
++-----------+           +--------------+      +------------+
+  userA                   userC                    userE
+  userB                   userD                    userF
+
+
+Login as: userA
+password: ...
+|
+userA@host~]$ vi p1.py {enter}
+....
+....
+:wq
+
+userA@host~]$ ls -l p1.py
+-rw-rw-r--  1 userA sales .. p1.py
+ =========
+   |->default file permission
+
+p1.py - file user is userA
+      - file is belongs to sales group
+
+
+
+File (F)
+=========
+   |---> handled by 3 users  and each user can perform 3 operations(mode)
+	 	    ---------			       ===================(read ; write ; execute)
+									   -------------  =======//kernel
+									    //user
+		     1. user (or) owner (or) author (or) login user
+		     2. group - collection of users
+		     3. others 
+
+(u) user => read write execute
+|            r     w     x
+(g) group => read write execute
+|            r   w     x
+(o) other => read write execute
+              r    w     x
+
+-rw-r--r--
+ == __ ------
+|   |      |---------------->others - can do read only 
+|  group can do read only
+|
+user can do read/write
+
+chmod
+------
+chmod user_details  +  mode  filename
+		    -
+
++  ==>To assign
+-  ==>To remove
+
+file: test1.txt
+ls -l test1.txt
+-rw-rw-r-- ... test1.txt
+
+To assign execute permission to user
+---------------------------------------
+chmod u + x test1.txt
+
+ls -l test1.txt
+-rwxrw-r-- ..test1.txt
+
+
+
+To remove an existing execute permission from user
+------------------------------------------------------
+chmod u - x test1.txt
+
+4	2	1
+r	w	x
+1	1	1	=>  7
+1	1	0	=>  6
+1	0	1	=>  5
+1	0	0	=>  4
+0	0	0	=>  0
+
+
+chmod 754 test1.txt
+      |||
+      |||---------->others
+      ||--->group       |------->read only
+   user      read-execute
+   ====
+    |->read/write/excute
+
+ls -l test1.txt
+rwxr-xr--
+===========
+=======================================================================================================
+
+grep - search  a pattern from inputFile (or) command result
+----			      .........
+
+find  - search a file (or) directory
+-----
+ |->recursive search
+ |->absolute path
+
+ Syntax:-
+---------
+ find <search-location>  -name  <inputFile/directory>
+
+-atime - access ->open a file and close it
+-mtime - modify ->open a file do edit/write close it
+-ctime - change ->change the file permission 
+
+ N -->extact N days  (ex: 3 exact 3 days)
+-N -->less than N days (ex: lessthan 3 days)
++N -->older than N days (ex: older than 3 days)
+
+
+filter regular file 
+--------------------
+-type  f
+
+filter directory file
+------------------------
+-type d
+
+=======================================================================================================
+
+karth@paka MINGW64 ~/sales
+$ ls
+L1/        demo.txt  finance/  p2.py  qa/
+accounts/  emp.csv   p1.py     prod/  test1.txt
+
+karth@paka MINGW64 ~/sales
+$
+
+karth@paka MINGW64 ~/sales
+$ mkdir -p var/log
+
+karth@paka MINGW64 ~/sales
+$ cd var/log
+
+karth@paka MINGW64 ~/sales/var/log
+$ ps >p1.log
+
+karth@paka MINGW64 ~/sales/var/log
+$ date >d1.log
+
+karth@paka MINGW64 ~/sales/var/log
+$ mkdir S1
+
+karth@paka MINGW64 ~/sales/var/log
+$ cd S1
+
+karth@paka MINGW64 ~/sales/var/log/S1
+$ ps >p2.log
+
+karth@paka MINGW64 ~/sales/var/log/S1
+$ cd ..
+
+karth@paka MINGW64 ~/sales/var/log
+$ pwd
+/c/Users/karth/sales/var/log
+
+karth@paka MINGW64 ~/sales/var/log
+$ cd ..
+
+karth@paka MINGW64 ~/sales/var
+$ pwd
+/c/Users/karth/sales/var
+
+karth@paka MINGW64 ~/sales/var
+$ cd ..
+
+karth@paka MINGW64 ~/sales
+$ ls
+L1/        demo.txt  finance/  p2.py  qa/        var/
+accounts/  emp.csv   p1.py     prod/  test1.txt
+
+karth@paka MINGW64 ~/sales
+$ find var/log -type f -mtime -1
+var/log/d1.log
+var/log/p1.log
+var/log/S1/p2.log
+
+karth@paka MINGW64 ~/sales
+$ find  -type f -mtime -1
+./demo.txt
+./emp.csv
+./L1/emp.csv
+./L1/L2/emp.csv
+./L1/L2/L3/emp.csv
+./p1.py
+./p2.py
+./qa/emp.csv
+./test1.txt
+./var/log/d1.log
+./var/log/p1.log
+./var/log/S1/p2.log
+
+karth@paka MINGW64 ~/sales
+
+=======================================================================================================
+Git
+----
+ |->Version Control System( VCS )
+    
+ |-> Keep project files / developement activity 
+
+https://github.com/Palanikarthikeyan/OB_Training-.git
+
+
+karth@paka MINGW64 ~
+$ mkdir myproject_demo
+
+karth@paka MINGW64 ~
+$ cd myproject_demo
+
+karth@paka MINGW64 ~/myproject_demo
+$ ls
+
+karth@paka MINGW64 ~/myproject_demo
+$ ls -a
+./  ../
+
+karth@paka MINGW64 ~/myproject_demo
+$ git init
+Initialized empty Git repository in C:/Users/karth/myproject_demo/.git/
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ ls
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ ls -a
+./  ../  .git/
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ ls .git
+HEAD  config  description  hooks/  info/  objects/  refs/
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ ls
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git add demo1.txt
+fatal: pathspec 'demo1.txt' did not match any files
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git add .
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ ls
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ ls -a
+./  ../  .git/
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ ls .git/
+HEAD  config  description  hooks/  info/  objects/  refs/
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git remote add origin https://github.com/Palanikarthikeyan/OB_Training-.git
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git remote -v
+origin  https://github.com/Palanikarthikeyan/OB_Training-.git (fetch)
+origin  https://github.com/Palanikarthikeyan/OB_Training-.git (push)
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ vi test1.py
+i
+karth@paka MINGW64 ~/myproject_demo (master)
+$ ls
+test1.py
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ pit push -u origin main
+bash: pit: command not found
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git push -u origin main
+error: src refspec main does not match any
+error: failed to push some refs to 'https://github.com/Palanikarthikeyan/OB_Training-.git'
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git push
+fatal: The current branch master has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin master
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ pit push -u origin master
+bash: pit: command not found
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git push -u origin master
+error: src refspec master does not match any
+error: failed to push some refs to 'https://github.com/Palanikarthikeyan/OB_Training-.git'
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+ls
+karth@paka MINGW64 ~/myproject_demo (master)
+$ ls .git/
+HEAD  config  description  hooks/  info/  objects/  refs/
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git pull origin main
+remote: Enumerating objects: 22, done.
+remote: Counting objects: 100% (22/22), done.
+remote: Compressing objects: 100% (18/18), done.
+remote: Total 22 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (22/22), 3.90 MiB | 7.28 MiB/s, done.
+From https://github.com/Palanikarthikeyan/OB_Training-
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git push origin main
+error: src refspec main does not match any
+error: failed to push some refs to 'https://github.com/Palanikarthikeyan/OB_Training-.git'
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git clone https://github.com/Palanikarthikeyan/OB_Training-.git
+Cloning into 'OB_Training-'...
+remote: Enumerating objects: 22, done.
+remote: Counting objects: 100% (22/22), done.
+remote: Compressing objects: 100% (18/18), done.
+remote: Total 22 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (22/22), 3.90 MiB | 7.15 MiB/s, done.
+Resolving deltas: 100% (1/1), done.
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ ls
+DAY1/  DAY2/  DAY3/  OB_Training-/  test1.py
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git branch feature-login
+
+karth@paka MINGW64 ~/myproject_demo (master)
+$ git checkout feature-login
+Switched to branch 'feature-login'
+
+karth@paka MINGW64 ~/myproject_demo (feature-login)
+$ git checkout main
+branch 'main' set up to track 'origin/main'.
+Switched to a new branch 'main'
+
+karth@paka MINGW64 ~/myproject_demo (main)
+$ git merge feature-login
+Already up to date.
+
+karth@paka MINGW64 ~/myproject_demo (main)
+$ git log --oneline --graph
+* 05cf4b0 (HEAD -> main, origin/main, master, feature-login) Create _
+* d7a0d04 Add files via upload
+* de9da82 Add files via upload
+* 764ffb1 Add files via upload
+* 31b5478 Create _
+* f2476ff Create SDLC_Activity
+
+karth@paka MINGW64 ~/myproject_demo (main)
+$ git add test1.py
+warning: in the working copy of 'test1.py', LF will be replaced by CRLF the next time Git touches it
+
+karth@paka MINGW64 ~/myproject_demo (main)
+$ git commit -m "added test python code"
+[main 6057e35] added test python code
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test1.py
+
+karth@paka MINGW64 ~/myproject_demo (main)
+$ git push origin main
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 303 bytes | 151.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/Palanikarthikeyan/OB_Training-.git
+   05cf4b0..6057e35  main -> main
+
+karth@paka MINGW64 ~/myproject_demo (main)
+$
+
+karth@paka MINGW64 ~/myproject_demo (main)
+$ vi requirements.txt
+
+karth@paka MINGW64 ~/myproject_demo (main)
+$ vi app.py
+
+karth@paka MINGW64 ~/myproject_demo (main)
+$ git add app.py requirements.txt
+warning: in the working copy of 'app.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'requirements.txt', LF will be replaced by CRLF the next time Git touches it
+
+karth@paka MINGW64 ~/myproject_demo (main)
+$ git commit -m "Added webapp startup files"
+[main 6c649c4] Added webapp startup files
+ 2 files changed, 5 insertions(+)
+ create mode 100644 app.py
+ create mode 100644 requirements.txt
+
+karth@paka MINGW64 ~/myproject_demo (main)
+$ git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 458 bytes | 229.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/Palanikarthikeyan/OB_Training-.git
+   6057e35..6c649c4  main -> main
+
+karth@paka MINGW64 ~/myproject_demo (main)
+
+
+
