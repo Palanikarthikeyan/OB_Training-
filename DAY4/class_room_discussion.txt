@@ -1,0 +1,725 @@
+Python Program
+-----------------
+ 1. Procedure style - direct approach 
+		      ----------------
+			myapp = "Flask" 
+			myport = 5000
+			
+			def display():
+				....
+				....
+				....
+			display() <== direct Call
+
+
+2. Object Oriented Style - object based initialization (ex: obj.myapp = "Flask"
+			   object based call		    obj.myport = 5000		
+							    obj.display() <-- methodCall)
+
+3. Functional style - Expression style - SinglelineCode 
+						
+###################################################################################################
+
+New to programming / new to python
+
+Step 1: Understand the topic definition (ex: what is variable ?  - placeholder - holding a value)
+|
+Step 2: Understand the topic Syntax (How to use the specific topic)
+
+	 ex: variableName = value  <== python is dynamic programming 
+	     ------------
+		|-> Variable name starts with alpha (or) _  (Not starts with digits)
+		|-> Variable name not allows space and specialchars 
+		
+		myapp = "Flask"	 	# Valid
+		
+		$myapp = "web2.0" 	# Invalid
+
+		my app = "web3.0"	# Invalid
+		
+		2web="app"		# Invalid  Vs  web2="app" <--- Valid
+
+		my_app = "web5.0"	# Valid
+
+Step 3: Refer an existing examples
+|
+Step 4: Exercise 
+----------------------------------------------------------------------------------------------------------
+
+Python Errors
+--------------
+1. Syntax Error		-  not following python rules 
+
+2. Logical Error 	- following python rules but it's logical mistakes 
+---------------------------------------------------------------------------------------------------------
+>>> L = []
+>>> def fx(a):
+...     return a+100
+...
+>>> for var in [10,20,30,40,50]:
+...     r = fx(var)
+...     L.append(r)
+...
+>>> print(L)
+[110, 120, 130, 140, 150]
+>>>
+>>> list(map(lambda a:a+100,[10,20,30,40,50]))
+[110, 120, 130, 140, 150]
+>>>
+>>> $var = 10
+  File "<stdin>", line 1
+    $var = 10
+    ^
+SyntaxError: invalid syntax
+>>>
+>>> var value=444
+  File "<stdin>", line 1
+    var value=444
+    ^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+>>>
+>>> print("Hello)
+  File "<stdin>", line 1
+    print("Hello)
+          ^
+SyntaxError: unterminated string literal (detected at line 1)
+>>>
+>>>
+>>> print("Hello")
+Hello
+>>>  print("Hello")
+  File "<stdin>", line 1
+    print("Hello")
+IndentationError: unexpected indent
+>>>
+>>> myapp = "Flask"
+>>> print(myapp)
+Flask
+>>>
+>>> print(MYapp)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'MYapp' is not defined. Did you mean: 'myapp'?
+>>>
+>>> App="demo1"
+>>> print(App)
+demo1
+>>> print(app)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'app' is not defined. Did you mean: 'App'?
+>>>
+>>> print(10+"A")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+>>>
+>>>
+		
+----------------------------------------------------------------------------------------------------------
+Python - everything is a class<-->object design model 
+			 ===============
+
+class - Type
+object - real value
+
+int float complex str bytes bool NoneType
+list tuple dict set 
+----------------------------------------//
+
+str - Collection of chars 
+    - '' (or) ""
+
+  10 <-- int Vs  '10' <-- str
+  10.0 <-- float Vs '10.0' <-- str 
+
+    - index based
+    - immutable 
+
+example:
+--------
+s = 'hello'  ===> s |h|e|l|l|o|
+		     0 1 2 3 4 
+
+How to fetch/get nth string?
+
+string_name[index] ->Value / IndexError 
+
+
+myapp = "Flask"
+print(Myapp[9])
+-------------------- NameError 
+print(myapp[9])
+------------------//IndexError
+myapp[0]="x" 
+-------------------//TypeError
+Myapp[0]="x"
+---------------//NameError
+
+s = 'hello'  ===> s |h|e|l|l|o|
+		     0 1 2 3 4 
+
+s = 'hello'  ===> s |h |e |l | l | o|
+		    -5 -4  -3 -2  -1
+
+len(input_string) -->output_int
+--- ============
+
+len("") ->0
+len("AB") ->2
+
+len("A,B") ->3
+
+------------------------------------------------------------------------------------------
+
+int
+float
+str
+
+Typecasting 
+--------------
+va = 10
+
+convert  int type ->float type
+                   ------------
+		    float() => float(va) ->10.0
+
+convert str type --> str(va) ->'10'
+
+s='45' 
+int(s) ->45
+
+int(s)+100 -->145
+------
+float(s) -->45.0
+
+float(s)+100 --->145.0
+ 
+
+>>> n=45
+>>> type(n)
+<class 'int'>
+>>>
+>>> float(n)
+45.0
+>>> type(n)
+<class 'int'>
+>>> n
+45
+>>> str(n)
+'45'
+>>> n
+45
+>>> n=str(n)
+>>> n
+'45'
+>>> type(n)
+<class 'str'>
+>>>
+>>>
+>>> 10+20
+30
+>>> "data"+"test"
+'datatest'
+>>>
+>>>
+>>> "A"+str(45)
+'A45'
+>>>
+>>> "A"+45
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate str (not "int") to str
+>>>
+>>>
+>>> cost=4567.23
+>>>
+>>> cost+"Rs"
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'float' and 'str'
+>>>
+>>> "Rs"+cost
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate str (not "float") to str
+>>>
+>>> str(cost)+"Rs"
+'4567.23Rs'
+>>>
+>>> "$"+str(cost)
+'$4567.23'
+>>> eid = 123
+>>> ename = "Raj"
+>>>
+>>> print("Emp name is:"+ename)
+Emp name is:Raj
+>>>
+>>> # Emp id is:123
+>>>
+>>> print("Emp id is:"+eid)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate str (not "int") to str
+>>>
+>>> print("Emp id is:"+str(eid))
+Emp id is:123
+>>>
+>>> cost=4500
+>>> cost="4500"
+>>> # Calculate 18% of cost
+>>> # -----------------------
+>>>
+>>> type(cost)
+<class 'str'>
+>>>
+>>> 0.18 * cost
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can't multiply sequence by non-int of type 'float'
+>>>
+>>> 0.18 * float(cost)
+810.0
+>>>
+>>> 0.18 * int(cost)
+810.0
+>>>
+
+>>> 10
+10
+>>> # type(value) (or) type(namedvariable)
+>>> # --------------------------------------//determine the type
+>>>
+>>> print(type(10))
+<class 'int'>
+>>>
+>>> va = 10
+>>> print(type(va))
+<class 'int'>
+>>> print(type(-1))
+<class 'int'>
+>>> print(type(10343242423234223422222222232444444444444444444444444444444))
+<class 'int'>
+>>> print(type(-10343242423234223422222222232444444444444444444444444444444))
+<class 'int'>
+>>>
+>>> print(type(0))
+<class 'int'>
+>>>
+>>> print(type(10.0))
+<class 'float'>
+>>> print(type(-10.0))
+<class 'float'>
+>>>
+>>> print(type(0.0))
+<class 'float'>
+>>>
+>>> cost = 3456.31
+>>> print(type(cost))
+<class 'float'>
+>>>
+>>>
+>>> 10+20
+30
+>>> 10+20.0
+30.0
+>>> 10-30
+-20
+>>> 10 * 3
+30
+>>> 10 * 3.3
+33.0
+>>> 10 / 3
+3.3333333333333335
+>>> 10 // 3
+3
+>>> 2 ** 3
+8
+>>> 2 ** 3.0
+8.0
+>>> 2 ** 3.2
+9.18958683997628
+>>> 34 % 3
+1
+>>> 34 % 3.0
+1.0
+>>> va = 34
+>>> vb = 45
+>>> va + vb
+79
+>>> va + vb * 3
+169
+>>> (va + vb) * 3
+237
+>>> 2+3*4
+14
+>>> (2+3)*4
+20
+>>> 10+20
+30
+>>> total = 10+20
+>>> print(total)
+30
+>>> s="hello"
+>>> s[0]
+'h'
+>>> s[1]
+'e'
+>>> s[2]
+'l'
+>>> va = s[2]
+>>> ############ we can initialize to another variable
+>>>
+>>> va
+'l'
+>>> s[2]='X' # Error - string is immutable
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'str' object does not support item assignment
+>>>
+>>>
+>>> s[5]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: string index out of range
+>>>
+>>>
+>>> print(s)
+hello
+>>>
+>>> len(s)
+5
+>>>
+
+Write a python program:
+ 
+- initialize a product name,product ID,product Cost
+- Calculate 18% of product cost and initialize to new variable called tax
+- Calculate Sum of productCost including tax
+- display product details - use print() 
+
+Expected Result:-
+--------------------
+Product name is: pA
+Product Cost is: 1000
+18% Tax is: 180
+Total including Tax: 1180 Rs
+--------------------------------
+
+
+
+## 
+To combine user defined string and named variable 
+
+>>>
+>>> va = 10
+>>> vb = 3.5
+>>> vc = 'data'
+>>>
+>>> print("va value is:",va,"vb value is:",vb,"vc value is:",vc) ## (1)
+va value is: 10 vb value is: 3.5 vc value is: data
+>>>
+>>> print("va value is:%d vb value is:%f vc value is:%s"%(va,vb,vc)) ##(2)
+va value is:10 vb value is:3.500000 vc value is:data
+>>>
+>>> va = 10
+>>> print("va value is:%d"%(va))
+va value is:10
+>>> va = "Hello"
+>>> print("va value is:%d"%(va))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: %d format: a real number is required, not str
+>>>
+>>>
+>>> print("va value is:{}".format(va))
+va value is:Hello
+>>>
+>>> va = 45
+>>> print("va value is:{}".format(va))
+va value is:45
+>>>
+>>> va = 3.335
+>>> print("va value is:{}".format(va))
+va value is:3.335
+>>>
+>>> va = 10
+>>> vb = 3.5
+>>> vc = 'data'
+>>> print("va value is:{} vb value is:{} vc value is:{}".format(va,vb,vc)) ##(3)
+va value is:10 vb value is:3.5 vc value is:data
+>>>
+>>>
+>>>
+>>> print(f"va value is:{va} vb value is:{vb} vc value is:{vc}") ##(4)
+va value is:10 vb value is:3.5 vc value is:data
+>>>
+>>>
+
+##
+Multiline string
+-----------------
+>>> depts="sales\nHR\nprod\nDevops"
+>>> print(depts)
+sales
+HR
+prod
+Devops
+>>>
+>>> depts='''sales
+... HR
+... prod
+... Devops'''
+>>> print(depts)
+sales
+HR
+prod
+Devops
+>>>
+
+#####################################################################################
+
+		     input()
+Keyboard(<STDIN>)  <---------- Python --------------> Monitor
+					print()
+ 
+Syntax:-
+---------
+variable = input('User defined prompt')
+.........
+ |->default return type will be string
+
+>>> input('')
+
+''
+>>>
+>>> input('Enter some text:')
+Enter some text:asdassadss
+'asdassadss'
+>>>
+>>> var = input('Enter some text:')
+Enter some text:asdfafassd
+>>>
+>>> var
+'asdfafassd'
+>>>
+>>> var = input('Enter some text:')
+Enter some text:56
+>>> var
+'56'
+>>> var = input('Enter some text:')
+Enter some text:56.23
+>>> var
+'56.23'
+>>>
+>>>
+>>> pname = input("Enter a product name:")
+Enter a product name:Laptop
+>>>
+>>> # Enter Laptop price
+>>>
+>>> # Enter pA cost
+>>>
+>>> pcost = input(f'Enter {pname} cost:')
+Enter Laptop cost:51900.324
+>>>
+>>> pcost
+'51900.324'
+>>>
+
+
+
+>>> a = 45
+>>>
+>>> complex(a)
+(45+0j)
+>>>
+>>> b = complex(a)
+>>>
+>>> b
+(45+0j)
+>>> int(b)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'complex'
+>>>
+>>> b.real
+45.0
+>>> b.img
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'complex' object has no attribute 'img'. Did you mean: 'imag'?
+>>> b
+(45+0j)
+>>>
+>>>
+>>>
+>>>
+>>> s = "Sample data"
+>>>
+>>> s[0]
+'S'
+>>> s[1]
+'a'
+>>> s[-1]
+'a'
+>>> ## Bytes --> Collection of chars ascii
+>>>
+>>> v = b'Sample data'
+>>>
+>>> type(v)
+<class 'bytes'>
+>>>
+>>> v[0]
+83
+>>> v[1]
+97
+>>> v[-1]
+97
+>>>
+>>> msg="Hello How are you"
+>>> type(msg)
+<class 'str'>
+>>>
+>>> msg.decode()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'str' object has no attribute 'decode'. Did you mean: 'encode'?
+>>>
+>>> msg.encode()
+b'Hello How are you'
+>>>
+>>> msg.encode()[0]
+72
+>>>
+>>> result = msg.encode()
+>>> result[0]
+72
+>>> type(result)
+<class 'bytes'>
+>>>
+>>> result.decode()
+'Hello How are you'
+>>>
+>>> result.decode()[0]
+'H'
+>>>
+
+=================================================================
+bool Type
+-----
+
+>>> type(True)
+<class 'bool'>
+>>>
+>>> type(False)
+<class 'bool'>
+>>>
+>>> True
+True
+>>> False
+False
+>>>
+>>> ## Arithmetic operators - inputs are:int,float -->int,float
+>>> ## String operators - input: str ->str
+>>> ##
+>>> ## Relational operators == != < <= > >= - inputs are:int,float,str -->bool
+>>>
+>>> port = 5000
+>>>
+>>> port >5000
+False
+>>> port >= 5000
+True
+>>> app = "test2"
+>>>
+>>> app == "test2"
+True
+>>> app != "test2"
+False
+>>>
+>>> n = input("Enter n value:")
+Enter n value:56
+>>>
+>>> int(n) > 50
+True
+>>>
+>>> n > 50
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: '>' not supported between instances of 'str' and 'int'
+>>>
+>>>
+>>> ## Logical operators ( and or not )
+>>> ## ---------------------------------
+>>> ## inputs are: int,float,str -->bool
+>>>
+>>> ## Single Conditional statement - test more than one condition //use logical operors
+>>>
+>>> port = 5000
+>>>
+>>> port >3000 ## test-1
+True
+>>> port < 6000 ## test-2
+True
+>>>
+>>> port >3000 and port <6000
+True
+>>>
+>>> myos="winx"
+>>>
+>>> myos == "Linux" or myos == "winx"
+True
+>>>
+>>> myos == "Linux"
+False
+>>>
+>>> myos == "winx"
+True
+>>>
+>>> n=5
+>>> n=n+1
+>>> n
+6
+>>> n=5
+>>> n+=1
+>>> n
+6
+>>>
+
+
+
+
+
+>>>
+>>> mydata="python"
+>>>
+>>> mydata.upper()
+'PYTHON'
+>>>
+>>>
+>>> type(mydata)
+<class 'str'>
+>>>
+>>> help(str.upper)
+Help on method_descriptor:
+
+upper(self, /)
+    Return a copy of the string converted to uppercase.
+
+>>> mydata.upper()
+'PYTHON'
+>>>
+>>> mydata
+'python'
+>>>
+>>> r = mydata.upper()
+>>> r
+'PYTHON'
+>>>
+>>>
+############################### End of the Day-4 #############################################
+
+
+
+					
