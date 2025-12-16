@@ -1,0 +1,839 @@
+Conditional statement
+Looping statements
+|
+list tuple 
+-----------------------------------
+Recap
+----------
+In python any expression -->bool (True / False)
+In python any method/function -->bool (True /False)
+----------------------------------------------------//we can use conditional statement
+
+Conditional statement
+------------------------
+ ->Code block - execute only one time //Validation (or) Testing 
+
+ if statement
+ --------------
+  1. if only style
+  2. if else style
+  3. if elif elif elif ...else  //multiconditional statement 
+
+  1. if only style
+ -------------------
+ if(condition):
+     ....
+     ....
+
+ 2. if else style
+--------------------
+if(condition):
+	....
+else:
+	....
+
+Task:
+------
+Write a python program:
+|-> read a port number from <STDIN>
+    test - input port range 5001-5999
+	   ----------------------------
+			|->initialize app name is demoApp
+
+         - if port range is not matched with above range
+			|->initialize app name is testApp
+ 
+    display - app name running port number 
+----------------------------------------------------------------------------------
+
+ 3. if elif elif elif ...else 
+
+ if(condition1):
+     True block-1
+ elif(condition2):
+     True block-2
+ elif(condition3):
+     True block-3
+ ...
+ elif(condition-N):
+     ...
+ else:
+     False block
+
+Write a python program:
+   read a shell name from <STDIN>
+   |
+   test1 - test input shell name is bash  - initialize profile filename /etc/bashrc 
+   test2 - test input shell name is ksh   - initialize profile filename /etc/kshrc 
+   test3 - test input shell name is csh (or) tcsh  - initialize profile filename /etc/cshrc
+				    ----     -----
+   test4 - test input shell name is psh - initialize profile fileme is C:\\win32\\profile
+   |
+   default shell name /bin/nologin  
+   default profile filename: /etc/profile
+
+   ->display shell name and profile filename 
+--------------------------------------------------------------------------------------------------
+
+Task:
+read a input string from keyboard (ex: 101,raj,sales,hyderabad,1000)
+|
+test - pattern sales is matched or not
+			|	     |->pattern sales is not exists
+			|
+			Given string pattern sales is exists
+
+inputs are: str,list,tuple,dict,set  -->bool
+
+in
+not in
+----------//membership operators
+
+'pattern_string' in input_string  ->bool
+ --------------- == ------------
+
+>>> "sales" in "asdfasdfaf sales asdfdsfds"
+True
+>>>
+>>> "sales" == "sales"
+True
+>>> "sales" == "sales,"
+False
+>>>
+
+------------------------------------------------------------------------------
+>>> type(True)
+<class 'bool'>
+>>> type(False)
+<class 'bool'>
+>>>
+>>>
+>>>
+>>> bool(0)
+False
+>>> bool(0.0)
+False
+>>> bool('')
+False
+>>> bool(b'')
+False
+>>> bool(None)
+False
+>>> bool([])
+False
+>>> bool(())
+False
+>>> bool({})
+False
+>>>
+>>> bool(-1)
+True
+>>> bool(1)
+True
+>>> bool(34322332423432)
+True
+>>>
+>>> bool('asfasfds')
+True
+>>> bool(' ')
+True
+>>>
+>>> n=45
+>>>
+>>> if(n):
+...     print('Yes')
+... else:
+...     print('No')
+...
+Yes
+>>> bool(n)
+True
+>>>
+>>>
+>>> name = input('Enter your name:')
+Enter your name:
+>>>
+>>> if(len(name) == 0):
+...     print('Sorry your input is empty')
+... else:
+...     print(f'Hello..{name}')
+...
+Sorry your input is empty
+>>>
+>>>
+>>> name = input('Enter your name:')
+Enter your name:leo
+>>>
+>>> if(len(name) == 0):
+...     print('Sorry your input is empty')
+... else:
+...     print(f'Hello..{name}')
+...
+Hello..leo
+>>>
+>>>
+>>>
+>>> name = input('Enter your name:')
+Enter your name:karthik
+>>>
+>>> bool(name)
+True
+>>> name = input('Enter your name:')
+Enter your name:
+>>> bool(name)
+False
+>>> name
+''
+>>>
+>>> if(name):
+...     print(f'Hello..{name}')
+... else:
+...     print('Sorry your input is empty')
+...
+Sorry your input is empty
+>>>
+>>> name = input('Enter your name:')
+Enter your name:karthik
+>>>
+>>> if(name):
+...     print(f'Hello..{name}')
+... else:
+...     print('Sorry your input is empty')
+...
+Hello..karthik
+>>>
+==============================================================================
+Looping statements
+------------------
+ |->Code block - execute more than one times
+    ----------
+	|->Conditional style loop  - while
+	|->Collection style loop   - for 
+
+
+|->Conditional style loop  - while
+=====================================
+  Rule-1: initialization	i=0			j=50
+  Rule-2: condition		|_ 5			 |___ 20
+  |
+  Rule-3: arithmetic 		i=i+1			j=j-1
+						
+ 
+initialization
+while(condition):
+   <code block>
+   arithmetic 
+
+
+>>> while(False):
+...     print("OK")
+...
+>>>
+>>> i = 0
+>>> while(i < 5):
+...     print(f"Test - server:{i}")
+...     i = i + 1
+...
+Test - server:0
+Test - server:1
+Test - server:2
+Test - server:3
+Test - server:4
+>>>
+>>> i
+5
+>>> i < 5
+False
+>>>
+
+break - exit from loop
+continue - ignore the current iteration - continue the loop
+========//looping keywords 
+
+Write a python program:
+	read a login name from <STDIN>
+	test - login name is root (or) not
+				|	|->Try-again 
+				|-> login is success
+        maximum input limit is 3
+	------------------------
+	 break - exit from loop
+
+-----------------------------------------------------------------------------
+|->Collection style loop   - for 
+
+Syntax:-
+---------
+for variable in inputCollection:
+--- ======== -- ================
+	<codeblock>
+
+string - collection of chars - index based 
+
+s = "root:x:bin"  ---> | r | o | o | t | : | x | : | b | i | n |
+		       |---|---|---|---| ..		   |---|
+			 0   1   2   3  ...		     N
+						        -2   -1
+we can fetch nth index => stringName[index]
+|
+we can do slicing
+ -------------------//range of chars (or) group of chars
+
+ stringName[n:m]  ->from nth index to m-1 index 
+		         ===          ====
+ 
+ stringName[n:]  ->from nth index to List of ALL
+		         ===          ====
+ 
+ stringName[:m]  ->from 0th index to m-1
+		         ===          ====
+ 
+>>> s="python is a general purpose programming"
+>>> len(s)
+39
+>>>
+>>> s[0]
+'p'
+>>> s[5]
+'n'
+>>> s[5:15] # from 5th index to 14th index(15-1)
+'n is a gen'
+>>>
+>>> s[5:] # from 5th index to ALL
+'n is a general purpose programming'
+>>>
+>>> s[:5] # from 0th index 4th index
+'pytho'
+>>>
+>>> s[:-5] # last 5chars
+'python is a general purpose progra'
+>>>
+>>> s[-5:] # last 5chars
+'mming'
+>>>
+>>> s="python is a general purpose programming"
+>>> len(s)
+39
+>>>
+>>> s[0]
+'p'
+>>> s[5]
+'n'
+>>> s[5:15] # from 5th index to 14th index(15-1)
+'n is a gen'
+>>>
+>>> s[5:] # from 5th index to ALL
+'n is a general purpose programming'
+>>>
+>>> s[:5] # from 0th index 4th index
+'pytho'
+>>>
+>>> s[:-5] # last 5chars
+'python is a general purpose progra'
+>>>
+>>> s[-5:] # last 5chars
+'mming'
+>>>
+>>>
+>>>
+>>> for var in "python":
+...     print("Test-Code")
+...
+Test-Code
+Test-Code
+Test-Code
+Test-Code
+Test-Code
+Test-Code
+>>> len("python")
+6
+>>> for var in "python":
+...     print("Test-Code:",var)
+...
+Test-Code: p
+Test-Code: y
+Test-Code: t
+Test-Code: h
+Test-Code: o
+Test-Code: n
+>>>
+>>> for var in s[5:20]:
+...     print(var)
+...
+n
+
+i
+s
+
+a
+
+g
+e
+n
+e
+r
+a
+l
+
+>>>
+===============================================================================
+stringName[index] ->Value / IndexError
+ 	   
+stringName[n:m] -->slicing //filter 
+=====================================================================================
+list
+-----
+ |->Collection of different types of item
+		  ----------------
+
+ |-> index based 
+
+ |-> mutable - we can add/modify/delete 
+
+ |-> supports slicing 
+
+ |-> help(list)
+     ------------
+
+ |-> [] <== list 
+
+ 
+ variable = [] <== empty list 
+
+ How to modify an existing item from given list ?
+
+   listName[oldIndex] = updatedValue
+   ----------------------------------
+
+ How to add new data / item to an existing list ?
+ --------------------------------------------------
+   listname.append(newValue) ->None
+        
+   listname.insert(index,newValue) ->None
+
+ How to delete nth data from given list
+ ---------------------------------------
+	listname.pop(index) -->removed_item
+		Vs
+	listname.pop() -->removed_last_item
+				   -------
+
+	
+ del() Vs List.pop()
+ -----    -----------
+ |              |->methodCall
+ |
+ functionCall
+
+ del(Listname[index]) ->None Vs Listname.pop(index) -->removedItem
+
+
+
+ >>> type([])
+<class 'list'>
+>>>
+>>> L = []
+>>>
+>>> len(L)
+0
+>>> type(L)
+<class 'list'>
+>>>
+>>> L=[101,45.32,True,'data']
+>>> print(type(L))
+<class 'list'>
+>>>
+>>> len(L)
+4
+>>> L
+[101, 45.32, True, 'data']
+>>>
+>>> for var in L:
+...     print('testcode',var)
+...
+testcode 101
+testcode 45.32
+testcode True
+testcode data
+>>>
+>>> product_info = [123,'pA',1000]
+>>> product_info
+[123, 'pA', 1000]
+>>>
+>>> product_info[0]
+123
+>>> product_info[1]
+'pA'
+>>> product_info[2]
+1000
+>>> product_info[-1]
+1000
+>>> product_info[-2:]
+['pA', 1000]
+>>>
+>>>
+>>> product_info[2]
+1000
+>>> product_info[2] = 1500 # modification
+>>>
+>>> product_info
+[123, 'pA', 1500]
+>>>
+>>> len(product_info)
+3
+>>>
+>>> L=[]
+>>> len(L)
+0
+>>> L.append("D1")
+>>> L.append("D2")
+>>> L.append("D3")
+>>> L.append(45)
+>>> L
+['D1', 'D2', 'D3', 45]
+>>>
+>>> L.insert(1,"data-1")
+>>> L
+['D1', 'data-1', 'D2', 'D3', 45]
+>>>
+>>> L.pop(2)
+'D2'
+>>> L
+['D1', 'data-1', 'D3', 45]
+>>> L.pop()
+45
+>>> L
+['D1', 'data-1', 'D3']
+>>>
+>>>
+>>> s='abc'
+>>> s.upper()
+'ABC'
+>>> s
+'abc'
+>>> ## Vs
+>>>
+>>> L=[]
+>>> L.append('data1')
+>>> L
+['data1']
+>>>
+>>>
+>>> i=45
+>>>
+>>> del(i)
+>>>
+>>> s='abc'
+>>> del(s)
+>>>
+>>> s='abc'
+>>> s[1]
+'b'
+>>> del(s[1])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'str' object doesn't support item deletion
+>>>
+>>> L=[1,2,3,4,5]
+>>> del(L[2])
+>>> L
+[1, 2, 4, 5]
+>>>
+>>>
+>>>
+>>>
+>>> s1="data1"
+>>> s2="test"
+>>>
+>>> s1+s2
+'data1test'
+>>>
+>>> L1=['data1','data2','data3']
+>>> L2=['sales','prod','QA']
+>>>
+>>> L3=[345]
+>>>
+>>> L1+L2+L3
+['data1', 'data2', 'data3', 'sales', 'prod', 'QA', 345]
+>>>
+>>> L1+s1
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate list (not "str") to list
+
+
+>>> contents=['data1\n','data2\n','data3\n','data4\n','data5\n','data6\n']
+>>>
+>>> # display last two lines
+>>>
+>>> contents[-2:]
+['data5\n', 'data6\n']
+>>>
+>>> contents[:2]
+['data1\n', 'data2\n']
+>>>
+>>> contents[2:5]
+['data3\n', 'data4\n', 'data5\n']
+>>>
+
+##############################################################################
+
+list - collection of different types of items - index based - [] - mutable
+|							      ============
+tuple - collection of different types of items - index based - () - immutable
+							       ================
+									
+tuple - fixed record set 
+
+  +----------------------+
+  |			  | - row1 -->( )
+  +----------------------+
+  |			  | - row2 -->( )
+  +----------------------+
+  ..
+  
+ 
+>>> type(())
+<class 'tuple'>
+>>>
+>>> type([])
+<class 'list'>
+>>>
+>>> L=[101,4.55,'data',True]
+>>>
+>>> T=(101,4.55,'data',True)
+>>>
+>>> type(T)
+<class 'tuple'>
+>>>
+>>> T[0]
+101
+>>> T[1]
+4.55
+>>> T[-1]
+True
+>>> T[-2:]
+('data', True)
+>>>
+>>> len(T)
+4
+>>> for var in T:
+...     print(var)
+...
+101
+4.55
+data
+True
+>>>
+>>> 'sales' in 'asfsadfsd salesfsdfasdfa'
+True
+>>>
+>>> L=['sales','QA','prod']
+>>>
+>>> 'sales' in L
+True
+>>>
+>>> T=('sales','QA','prod')
+>>>
+>>> 'sales' in T
+True
+>>>
+>>> L
+['sales', 'QA', 'prod']
+>>> L[1]
+'QA'
+>>> L[1] = "Sys-QA"
+>>> L
+['sales', 'Sys-QA', 'prod']
+>>> L.append("Devops")
+>>> L
+['sales', 'Sys-QA', 'prod', 'Devops']
+>>>
+>>> T
+('sales', 'QA', 'prod')
+>>>
+>>> T[1]
+'QA'
+>>> T[1]="XYZ"
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+>>>
+
+
+# we can typecast list <->tuple
+
+
+>>> config_files=("/etc/hosts","/etc/f1","/etc/network","C:\\winx")
+>>>
+>>> type(config_files)
+<class 'tuple'>
+>>> len(config_files)
+4
+>>>
+>>> list(config_files)
+['/etc/hosts', '/etc/f1', '/etc/network', 'C:\\winx']
+>>>
+>>> tv = list(config_files)
+>>>
+>>> tv
+['/etc/hosts', '/etc/f1', '/etc/network', 'C:\\winx']
+>>>
+>>> tv.append("/etc/sysconfig")
+>>> tv.pop(1)
+'/etc/f1'
+>>> tv
+['/etc/hosts', '/etc/network', 'C:\\winx', '/etc/sysconfig']
+>>> tuple(tv)
+('/etc/hosts', '/etc/network', 'C:\\winx', '/etc/sysconfig')
+>>>
+>>> config_files = tuple(tv)
+>>>
+>>> config_files
+('/etc/hosts', '/etc/network', 'C:\\winx', '/etc/sysconfig')
+>>>
+
+######
+python supports multiple initialization
+------------------------------------------
+
+variable = value
+
+       |-------------------|
+var1,var2,var3 = value1,value2,value3
+|         ||________|____________||
+|         |_______________________|
+|___________________|
+
+//ValueError 
+
+
+>>> va,vb = 10,20
+>>> va
+10
+>>> vb
+20
+>>>
+>>> L1,L2 = [],[]
+>>> L1
+[]
+>>> L2
+[]
+>>>
+>>> va,vb,vc = 10,4.5,'data'
+>>>
+>>> va
+10
+>>> vb
+4.5
+>>> bc
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'bc' is not defined. Did you mean: 'vc'?
+>>> vc
+'data'
+>>>
+>>> va,vb,vc = 10,4.5
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: not enough values to unpack (expected 3, got 2)
+>>>
+>>> va,vb,vc = 10,4.5,45,555
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: too many values to unpack (expected 3)
+>>>
+>>>
+>>> emp=['raj','sales',4500]
+>>>
+>>> ename = emp[0]
+>>> edept = emp[1]
+>>> ecost = emp[-1]
+>>>
+>>> Ename,Edept,Ecost = emp
+>>>
+>>>
+>>>
+>>> results=("STDOUT","STDERR")
+>>>
+>>> r1,r2 = results
+>>> r1
+'STDOUT'
+>>> r2
+'STDERR'
+>>>
+
+>>> s="101,raj,sales,pune,1000"
+>>>
+>>> type(s)
+<class 'str'>
+>>>
+>>> len(s)
+23
+>>> # string method => split() --> string.split("sep") -->list_output
+>>>
+>>> s.split(",")
+['101', 'raj', 'sales', 'pune', '1000']
+>>>
+>>>
+>>> eid,ename,edept,eplace,ecost = s.split(",")
+>>>
+>>> eid
+'101'
+>>> ename
+'raj'
+>>> edept
+'sales'
+>>> eplace
+'pune'
+>>> ecost
+'1000'
+>>>
+>>> int(ecost) * 0.18
+180.0
+>>>
+>>> s="root:x:bin:bash"
+>>>
+>>> s.split(":")
+['root', 'x', 'bin', 'bash']
+>>>
+###############################################################################################
+>>> s='abcdefghijkl'
+>>>
+>>> s[1:5]
+'bcde'
+>>>
+>>> s[1:9]
+'bcdefghi'
+>>>
+>>> s[1:9:2]
+'bdfh'
+>>>
+###################################  End of DAY 5 ########################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
