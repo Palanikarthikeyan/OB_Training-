@@ -1,0 +1,640 @@
+dict
+set
+combination of list,tuple,dict
+|
+Function
+|--> Simple Function Call
+|--> Call with arguments
+|--> Scope of the variable 
+|--> return 
+lambda 
+------------------------------------
+Recap
+------
+list - Collection of different types of items - mutable - index based - []
+       list_name = []
+       list_name[index] ->Value / IndexError 
+       list_name[n:m] ->slicing 
+       list_name[-4:] -->last 4 items
+	..
+       list_name[oldIndex] = updatedValue
+
+       list_name.append(Value) -> None
+       list_name.insert(index,Value) ->None
+	
+       list_name.pop(index) ->removed_Value
+       list_name.pop() -->remove last index value
+    
+       
+tuple -  Collection of different types of items - immutable - index based - ()
+	
+multiple initialization 
+------------------------------------------------------------------
+Task
+-----
+Write a python program:
+ |-> initialize a pin number (ex: pin = 1234)
+ |-> use while loop - limit is 3
+	 ===========
+	  |-> read a pin Number from <STDIN>
+	  |-> test - input pin matched with an existing pin 
+		   - display - pin success - <Count> (ex: pin is matched - 1/2/3)
+
+ |-> if all 3 inputs are failed - pin is blocked.
+
+Task
+-----
+Write a python program:
+ create an empty list
+  |
+ append - user input details 
+			|-->Success pin / failed pin number
+ 
+ read a option from <STDIN> (Wish to read input pin details? Yes | YES):
+  |->display list of items(pin details)
+----------------------------------------------------------------------
+
+dict
+-----
+  |--> Collection of items - key:value // data - key based - mutable - {}
+
+Syntax:-
+--------
+dictName = {'key1':value,'key2':value,...'Kn':'Vn'} 
+	   ------------------------------------------
+
+	+------------------------------+
+	|  Key       |     Value       |
+	+------------|-----------------+
+	|  Key1      |     Value1      |
+	+------------|-----------------+
+	|  Key2	     |	   Value2      |
+	+------------|-----------------+
+	|  Key3	     |     Value3      |
+	+------------|-----------------+
+
+
+d = {10: 'V1',10.34:'V2',True: 'V3','K1':'V4',():'V5'}
+
+
+
+ d={'K1':'V1'}
+
+ d['K1'] ->V1
+
+ dictName['inputKey'] -->Value / KeyError
+	   ========
+
+  d['k1'] -->KeyError 
+
+
+How to modify an existing dict item?
+
+  dictName[oldKey] = updatedValue
+
+
+How to add new data to an existing dict?
+
+  dictName[newKey] = value
+
+
+create an empty dict
+|
+test - input key name is DB -->exists - display key - value
+			 |
+			not exists --> add new data to an existing dict then display key:value//
+
+
+>>> d={'course':'python'}
+>>> d
+{'course': 'python'}
+>>> len(d)
+1
+>>> d['course']
+'python'
+>>>
+>>> d['Course']
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'Course'
+>>>
+>>> d['course']='FlaskApp'
+>>> d
+{'course': 'FlaskApp'}
+>>> len(d)
+1
+>>> d
+{'course': 'FlaskApp'}
+>>>
+>>> d['author']='Mr.ABC'
+>>> d['duration']='45Hrs'
+>>> d
+{'course': 'FlaskApp', 'author': 'Mr.ABC', 'duration': '45Hrs'}
+>>>
+>>>
+>>> d['duration']='21Hrs' # modification
+>>> d
+{'course': 'FlaskApp', 'author': 'Mr.ABC', 'duration': '21Hrs'}
+>>>
+>>>
+>>>
+>>> d.pop('course')
+'FlaskApp'
+>>> d
+{'author': 'Mr.ABC', 'duration': '21Hrs'}
+>>>
+>>> d.pop('course')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'course'
+>>>
+>>>
+>>> d
+{'author': 'Mr.ABC', 'duration': '21Hrs'}
+>>>
+>>> 'course' in d
+False
+>>> 'author' in d
+True
+>>> 'Mr.ABC' in d
+False
+>>> ## test - key is existing or not
+>>>
+>>>
+>>>
+>>> db={}
+>>>
+>>> if('oracle' in d):
+...     pass
+...
+>>>
+>>> if('oracle' in db):
+...     print(db['oracle'])
+... else:
+...     db['oracle'] = '/usr/bin/oracle'
+...     print(db['oracle'])
+...
+/usr/bin/oracle
+>>> db
+{'oracle': '/usr/bin/oracle'}
+>>>
+>>> 'oracle' in db
+True
+>>>
+>>>
+>>> L=[10,20,30,40,50]
+>>>
+>>> for var in L:
+...     print(var)
+...
+10
+20
+30
+40
+50
+>>> d={"K1":"V1","K2":20,"K3":4.55,"K4":True}
+>>>
+>>> for var in d:
+...     print(var)
+...
+K1
+K2
+K3
+K4
+>>> d['K1']
+'V1'
+>>> for var in d:
+...     print(var,d[var])
+...
+K1 V1
+K2 20
+K3 4.55
+K4 True
+>>>
+
+Write a python program:
+
+Create an empty dict named as product (ex: product={})
+|
+display - no.of items from dict => 0 
+|
+use - while loop - limit is 5
+	|
+	| -> read a product ID from <STDIN>
+	| -> read a product Cost from <STDIN>
+	|
+	| -> add input details to dict
+		 -------------
+		  dict key -> product ID
+		  dict Value -> product Cost
+	
+|
+use for loop - display key - value
+|
+display - no.of items from dict => 5 
+
+
+>>> d={}
+>>>
+>>> d['K1'] = 'V1'
+>>> d
+{'K1': 'V1'}
+>>>
+>>> d.setdefault('K2','V2')
+'V2'
+>>> d
+{'K1': 'V1', 'K2': 'V2'}
+>>>
+>>> d['K1']
+'V1'
+>>> d['k1']
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'k1'
+>>>
+>>> d.get('K1')
+'V1'
+>>> d.get('k1')
+>>>
+>>> d.get('k1') == None
+True
+>>>
+>>> for var in d:
+...     print(var)
+...
+K1
+K2
+>>> d.keys()
+dict_keys(['K1', 'K2'])
+>>>
+>>> d.values()
+dict_values(['V1', 'V2'])
+>>>
+>>>
+>>> d.items()
+dict_items([('K1', 'V1'), ('K2', 'V2')])
+>>>
+>>>
+----------------------------------------------------------------------------------------
+list tuple dict
+----------------//combination of 3 
+
+L1 = ['server1','server2','server3']
+
+L2 = ['oracle','mysql','sqlite3']
+
+L3 = [['server1','server2','server3'],['oracle','mysql','sqlite3'],'data']
+     |------------------------------- ============================  -----
+	       0th index		  1st index                2nd index
+
+
+
+
+L=[['server1','server2','server3'],('App1','App2','App3'),{'F1':'web1.cfg','F2':'web2.cfg','F3':'web3.cfg'}]
+  |========================================================================================================
+  |					|->un-named data
+  named list
+
+L[0] ->['server1','server2','server3']		=> L[0][0] ->'server1' L[0][1] ->server2
+
+L[1] ->('App1','App2','App3')			=> L[1][0] ->'App1'
+
+L[2] ->{'F1':'web1.cfg','F2':'web2.cfg','F3':'web3.cfg'} =>L[2]['F1'] -->web1.cfg
+	
+	
+
+T=(['server1','server2','server3'],('App1','App2','App3'),{'F1':'web1.cfg','F2':'web2.cfg','F3':'web3.cfg'})
+
+
+d={'K1':'V1'} # 1D 
+
+
+d={
+   'K1': ['V1','V2','V3'],
+   'K2': ('Va','Vb','Vc'),
+   'K3': {'K1':10,'K2':20}
+  }
+
+d['K1'] ->['V1','V2','V3']	-> d['K1'][0] ->'V1'
+
+d['K2'] ->('Va','Vb','Vc')	-> d['K2'][0]  -> 'Va'
+
+d['K3'] ->{'K1':10,'K2':20}	-> d['K3']['K1'] -> 10
+---------------------------------------------------------------------------------------------------------
+
+set
+----
+ |-> Collection of items
+		   ------//unique value(item)
+
+ |-> set is not index based 
+     set is not key:value based 
+
+ |-> we can do membership ; for loop 
+
+ |-> we can do len() - no.of items
+
+
+set operations
+----------------
+ union
+ intersection
+ difference
+ symmetric_difference 
+--------------------------//
+	|->set operators (or) set methods 
+
+
+
+
+
+>>>
+>>>
+>>> d={}
+>>>
+>>> d['K1'] = 'V1'
+>>> d
+{'K1': 'V1'}
+>>>
+>>> d.setdefault('K2','V2')
+'V2'
+>>> d
+{'K1': 'V1', 'K2': 'V2'}
+>>>
+>>> d['K1']
+'V1'
+>>> d['k1']
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'k1'
+>>>
+>>> d.get('K1')
+'V1'
+>>> d.get('k1')
+>>>
+>>> d.get('k1') == None
+True
+>>>
+>>> for var in d:
+...     print(var)
+...
+K1
+K2
+>>> d.keys()
+dict_keys(['K1', 'K2'])
+>>>
+>>> d.values()
+dict_values(['V1', 'V2'])
+>>>
+>>> d.item()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'dict' object has no attribute 'item'. Did you mean: 'items'?
+>>>
+>>> d.items()
+dict_items([('K1', 'V1'), ('K2', 'V2')])
+>>>
+>>>
+>>>
+>>> s={10,20,30,10,10,20,20,30,'K1','K2','V1','K1','K2'}
+>>> type(s)
+<class 'set'>
+>>>
+>>> len(s)
+6
+>>> s
+{'K1', 20, 'V1', 'K2', 10, 30}
+>>>
+>>>
+>>> L=['data1','data2','data2','data1','data2','data1','data2','data3']
+>>> L
+['data1', 'data2', 'data2', 'data1', 'data2', 'data1', 'data2', 'data3']
+>>>
+>>> set(L)
+{'data2', 'data3', 'data1'}
+>>>
+>>> list(set(L))
+['data2', 'data3', 'data1']
+>>>
+>>>
+>>> s={"K1","V1",10,20}
+>>>
+>>> len(s)
+4
+>>> s.add(30)
+>>> s.add("K1")
+>>>
+>>> s
+{'K1', 'V1', 10, 20, 30}
+>>>
+>>> s.update([10,20,30,40])
+>>> s
+{'K1', 'V1', 40, 10, 20, 30}
+>>>
+>>> s.remove(40)
+>>> s
+{'K1', 'V1', 10, 20, 30}
+>>> s.discard(10)
+>>> s
+{'K1', 'V1', 20, 30}
+>>>
+>>> s.remove(40)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 40
+>>>
+>>> s.discard(10)
+>>>
+>>> depts=[]
+>>> depts.append('sales')
+>>> depts.append('QA')
+>>> depts.append('prod')
+>>> depts.append('devops')
+>>> depts.append('DBA')
+>>> depts.append('prod')
+>>> depts.append('prod')
+>>> depts.append('sales')
+>>> depts.append('sales')
+>>> depts.append('QA')
+>>> depts.append('QA')
+>>> depts.append('devops')
+>>>
+>>> depts.append('admin')
+>>>
+>>> len(depts)
+13
+>>> depts
+['sales', 'QA', 'prod', 'devops', 'DBA', 'prod', 'prod', 'sales', 'sales', 'QA', 'QA', 'devops', 'admin']
+>>>
+>>>
+>>> set(depts)
+{'devops', 'prod', 'sales', 'admin', 'DBA', 'QA'}
+>>>
+>>> list(set(depts))
+['devops', 'prod', 'sales', 'admin', 'DBA', 'QA']
+>>>
+>>> depts_n = list(set(depts))
+>>>
+>>> len(depts_n)
+6
+>>> Log1=['bash 45623','python 33242','java gc 42.34','prom 43.33']
+>>>
+>>> Log2=['java gc 42.34','prom 43.33','db 323.2','glabs 32.33']
+>>>
+>>>
+>>> set(Log1) | set(Log2) # union()
+{'db 323.2', 'python 33242', 'bash 45623', 'prom 43.33', 'java gc 42.34', 'glabs 32.33'}
+>>> set(Log1) & set(Log2) # intersection()
+{'prom 43.33', 'java gc 42.34'}
+>>>
+>>>
+>>> set(Log1) - set(Log2) #
+{'python 33242', 'bash 45623'}
+>>>
+>>> set(Log2) - set(Log1) #
+{'db 323.2', 'glabs 32.33'}
+>>>
+>>> set(Log2) ^ set(Log1) #
+{'db 323.2', 'python 33242', 'bash 45623', 'glabs 32.33'}
+>>>
+
+
+
+---
+lambda - un-named function
+------
+ |-> functionCall with arguments and return some value 
+
+
+lambda <list of args>:basic operation
+		      ---------------- //
+
+
+def fx(a1):
+	return a1
+
+def fx(a1):
+	return a1+100
+
+def fx(a1):
+	return a1 > 50
+
+------------------------//we can convert to lambda
+
+
+Vs
+
+def fx(a1):
+	a1=a1+100 <== 
+	return a1
+-------------------//we can't convert to lambda
+
+
+
+>>> def fx():
+...     app = "test1"
+...     return app
+...
+>>> fx()
+'test1'
+>>>
+>>> myvar = fx()
+>>> myvar
+'test1'
+>>>
+>>> app
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'app' is not defined
+>>>
+>>>
+>>> def fx():
+...     return "test1",5000
+...
+>>> fx()
+('test1', 5000)
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> def f1(a1,a2):
+...     return a1+a2
+...
+>>> f1(10,20) # named Function call with args
+30
+>>>
+>>> lambda a1,a2:a1+a2
+<function <lambda> at 0x0000022EBB2F72E0>
+>>>
+>>> f2 = lambda a1,a2:a1+a2
+>>>
+>>> f2(10,20)
+30
+>>>
+>>>
+>>> def f3(a1):
+...     return a1.upper()
+...
+>>> f3('hello')
+'HELLO'
+>>>
+>>> def f4(a1,a2):
+...     return a1>a2
+...
+>>> f4(105,55)
+True
+>>>
+>>>
+>>>
+>>> lam
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'lam' is not defined
+>>>
+>>>
+>>> F3 = lambda a1:a1.upper()
+>>> F3('abc')
+'ABC'
+>>> F3('hello')
+'HELLO'
+>>>
+>>>
+>>> f4 = lambda a1,a2: a1 >a2
+>>> f4(105,15)
+True
+>>> f4(105,200)
+False
+>>>
+
+>>>
+>>>
+>>> def fx(a):
+...     if(a >100 and a <200):
+...             return a+500
+...     elif(a >500 and a <600):
+...             return a+1000
+...     else:
+...             a=a+50
+...             return a
+...
+>>>
+>>> fx(150)
+650
+>>>
+>>> f5 = lambda a1:fx(a1)
+>>>
+>>> f5(150)
+650
+>>>
+#############   End of the DAY6 ##############
+
+
+
