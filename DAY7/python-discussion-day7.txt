@@ -1,0 +1,469 @@
+-------
+Tasks:
+------
+Given List
+
+Emp=['101,raj,sales,pune,1000',
+     '102,leo,prod,bglore,2000',
+     '103,anu,sales,hyd,3000',
+     '104,zion,sales,bglore,3450']
+
+iterate a given list - line by line
+split each line into multiple values based on ,  ->do multiple initialization
+display - Emp name in Title case format 
+	  Emp Working City in Uppercase format
+	  Calculate Sum of emp's cost - display total cost at the end of the line.
+
+>>> s='raj'
+>>>
+>>> s.title()
+'Raj'
+>>> s.upper()
+'RAJ'
+>>> dept='sales'
+>>> dept.upper()
+'SALES'
+>>>
+
+
+------
+|
+filter - sales depts
+display - Emp name in Title case format 
+	  Emp Working City in Uppercase format
+	  Calculate Sum of sales dept emp's cost - display sales dept total cost 
+          at the end of the line.
+--------------------------------------------------------------------------------------
+|
+write a function - pass dept name as argument 
+ filter - <input> depts //argument 
+ display - Emp name in Title case format 
+	  Emp Working City in Uppercase format
+	  Calculate Sum of sales dept emp's cost - display sales dept total cost 
+          at the end of the line.
+   
+--------------------------------------------------------------------------------------
+
+Write a python program:
+-------------------------
+ -> create an empty dictionary
+ -> use while loop - limit is 5
+	|
+	|-> read a network alias name from <STDIN> (ex: host01)
+	|-> read an IP Address from <STDIN>     (ex: 192.168.1.10)
+	|
+	|-> add input alias and ip address to an existing dictionary
+		-------------------------
+		network alias - key
+		ipAddress     - Value
+
+ -> display - list host details # use for loop
+    
+ -> read any hostname from <STDIN>
+    |
+   Test: input host is exists or not
+			|	   |->ignore it.
+		 -> modify ip address ->127.0.0.1
+		 -> display updated network details 
+---------------------------------------------------------------
+Recap
+------
+1. Multidimensional
+2. lambda 
+
+1. Multidimensional
+=====================
+list 
+tuple
+dict
+--------//combination of these 3 types 
+
+list - mutable - index based 
+tuple - immutable - index based 
+dict - mutable - key:value //pair - key based 
+		
+list - list,tuple,dict
+
+list of list
+list of tuple
+list of dict
+---- ========
+|	|->unnamed 
+|
+named
+
+L1 = [101,'pA',1000]
+
+L2 = [102,'pB',2000]
+
+L3 = [103,'pC',3000]
+-----------------------// 1D
+   
+       0    1    2     0   1     2     0    1    2 <== nested index 
+L = [[101,'pA',1000],[102,'pB',2000],[103,'pC',3000]] <== MD - list of list
+    |---------------|---------------|---------------|
+    |     0th           1st             2nd         |<== outer index
+ 
+print(L) --> [[101,'pA',1000],[102,'pB',2000],[103,'pC',3000]]
+|
+print(L[0]) -->[101,'pA',1000] => print(L[0][0]) -->101
+				  print(L[0][1]) -->'pA'
+				  ..
+				
+
+print(L[1]) -->[102,'pB',2000]  =>print(L[1][0]) -->102
+
+print(L[2]) --->[103,'pC',3000]
+			
+print(L[2][1]) -----> pC
+-------------------------------------------------------------------
+
+L=[[101,'pA',1000] , (102,'pB',2000)]
+  |------0th------   ------1st ---- |
+  |                                 |
+ list
+
+List of list - 0th index
+List of tuple - 1st index
+
+print(type(L)) --><class list>
+|
+print(type(L[0]) --><class list>
+|
+print(type(L[1]) ---><class tuple>
+
+print(L[1]) -->(102,'pB',2000)
+
+How to get pB value ?
+
+ print(L[1][1]) -> pB
+
+L=[[101,'pA',1000] , (102,'pB',2000)]
+  |------0th------   ------1st ---- |
+
+
+L[0][-1] =>1000			 print(L[1][-1]) ->2000 # OK
+
+L[0][-1] = 1200 # we can modify  Vs  L[1][-1] = 2500 # Error - tuple is immutable 
+
+###
+L=[[101,'pA',1000] , (102,'pB',2000)]
+
+L[0] = 1200 ---> [1200,(102,'pB',2000)]
+
+
+
+L=[[101,'pA',1000] , (102,'pB',2000)]
+
+L.append("DA") --> [[101,'pA',1000] , (102,'pB',2000),"DA"]
+
+Vs
+
+L[0].append("Dx") ==> [[101,'pA',1000,"Dx"] , (102,'pB',2000),"DA"]
+
+-------------------------------------------------------------------------
+product = {'pid':101,'pname':'pA','pcost':1000}
+------------------------------------------------// this is dict
+
+L = [] # empty list
+
+L.append(product) 
+print(L)
+|
+[ {'pid':101,'pname':'pA','pcost':1000} ]
+|  ------------------------------------ |
+|         0th index                     |
+list                                  list
+
+    ==> print(L) -->[{'pid':101,'pname':'pA','pcost':1000}]
+    
+    ==> print(L[0]) ->{'pid':101,'pname':'pA','pcost':1000}
+	|
+
+display product id   ===> print(L[0]['pid']) ->101
+
+display product name  ===> print(L[0]['pname']) -->'pA'
+|
+modify product cost - 2000  ===> L[0]['pcost'] = 2000
+-------------------------------  ----------------------
+
+ ###########################
+
+
+
+L = [ (101,102,103),['pA','pB','pC'],{'K1':1000,'K2':2000,'K3':3000} ]
+    | ------------ | ---------------| -----------------------------
+    |   0th index     1st index              2nd index 
+    |
+    namedlist
+List of tuple
+List of list
+List of dict
+---------------//
+
+Tuple of list
+Tuple of tuple
+Tuple of dict
+======----------//
+|
+named 
+=====
+
+T=([],[])
+
+print(len(T)) -->2
+
+T[0].append(10)
+T[0].append(20)
+T[0].append(30)
+T[0].append(40)
+T[0].append(50)
+T[0].append(60)
+
+print(len(T)) ===> 
+
+([10,20,30,40,50,60],[])
+----------------------------// 2 
+
+----------------------------------------------------------------------------
+
+product = {'pid':101,'pname':'pA','pcost':1000} # 1D  1Key ->1Value
+
+dict of list  => Key: [ ]
+
+dict of tuple => Key: ( )
+
+dict of dict  => Key: { }
+
+
+product = {'pid':[101,102,103],
+	   'pname':['pA','pB','pC'],
+	   'pcost':[1000,2000,3000] 
+	   }
+------------------// dict of list
+		   0   1   2  
+product['pid'] ->[101,102,103]
+
+print(product['pid'][0]) ->101
+print(product['pid'][1]) ->102
+
+produt['pcost'][0] = 1250 # modification # OK
+	     -------====
+##################################################
+
+product = {'pid':(101,102,103),
+	   'pname':('pA','pB','pC'),
+	   'pcost':(1000,2000,3000) 
+	   }
+------------------// dict of tuple
+
+print(product['pid'][0]) ->101
+print(product['pid'][1]) ->102
+	     -------====
+produt['pcost'][0] = 1250  # Error 
+
+===================================================
+
+d = {"K1":"V1","K2":"V2","K1":100} ---> print(d) -->{"K1":100,"K2":"V2"} 
+					---------------------------------//key must be unique
+
+d = {
+     "K1":{"K1":"V1","K2":"V2"},
+     "K2":{"K1":100,"K2":200},
+     "K3":{"K1":1.44,"K2":3.34}
+    }
+----------// dict of dict 
+
+print(d)
+
+print(d['K1']) ->{"K1":"V1","K2":"V2"}
+
+print(d['K1']['K1']) -->'V1'
+
+print(d['K1']['K2']) -->'V2'
+	----  -----
+	---------------//dict of dict
+==========================================================================================================
+
+Client ---------------Server---------->....
+
+		------<--------------------
+			1. WebPage Response // <html>+{{data}}
+
+			2. API Response // data only - json format
+					 --------------------------//
+						
+
+
+ L = [
+    {
+    "login": "ggobi",
+    "id": 423638,
+    "node_id": "MDEyOk9yZ2FuaXphdGlvbjQyMzYzOA==",
+    "url": "https://api.github.com/orgs/ggobi",
+    "repos_url": "https://api.github.com/orgs/ggobi/repos",
+    "events_url": "https://api.github.com/orgs/ggobi/events",
+    "hooks_url": "https://api.github.com/orgs/ggobi/hooks",
+    "issues_url": "https://api.github.com/orgs/ggobi/issues",
+    "members_url": "https://api.github.com/orgs/ggobi/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/ggobi/public_members{/member}",
+    "avatar_url": "https://avatars.githubusercontent.com/u/423638?v=4",
+    "description": ""
+    },
+   {
+    "login": "rstudio",
+    "id": 513560,
+    "node_id": "MDEyOk9yZ2FuaXphdGlvbjUxMzU2MA==",
+    "url": "https://api.github.com/orgs/rstudio",
+    "repos_url": "https://api.github.com/orgs/rstudio/repos",
+    "events_url": "https://api.github.com/orgs/rstudio/events",
+    "hooks_url": "https://api.github.com/orgs/rstudio/hooks",
+    "issues_url": "https://api.github.com/orgs/rstudio/issues",
+    "members_url": "https://api.github.com/orgs/rstudio/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/rstudio/public_members{/member}",
+    "avatar_url": "https://avatars.githubusercontent.com/u/513560?v=4",
+    "description": ""
+   }
+]
+
+L[0]['login'] -> 'ggobi'
+L[1]['login'] -> 'rstudio'
+
+
+cloud={}
+
+cloud['aws'] = [{'url': 'aws.cosole.com'}]
+cloud['gcp'] = [{'url': 'gcp.console.com'}]
+cloud['azure'] = [{'url': 'azure.console.com'}]
+
+==================================================================================
+
+lambda 
+-------
+ |-> python keyword 
+
+ |-> unnamed function  - single line code 
+
+ |-> logic is function call with argument and return some value
+	      ===================================================
+
+ def f1(a):
+      return a+100
+-----------------------//named function block 
+
+f1(10)
+f1(20)
+----------//function Call with arguments
+
+
+ lambda <list of args> : basic Operation
+			 -----------------
+				|->Expression (arithmetic ; relational ; logical;membership)
+				|->External FunctionCall
+
+f2 = lambda a:a+100
+f2(10) 
+f2(20)
+--------//function Call with arguments
+
+
+def f3(a1,a2,a3):
+	return a1+a2+a3
+
+f3(10,20,30) //function call with 3 arguments
+
+  |
+  |
+f4 = lambda a1,a2,a3 : a1+a2+a3
+|
+f4(10,20,30) //function call with 3 arguments
+------------
+
+
+>>> def f1(a1,a2):
+...     return a1+a2
+...
+>>> f1(10,20)
+30
+>>>
+>>> f2 = lambda a1,a2:a1+a2
+>>> f2(10,20)
+30
+>>> def f3(a1):
+...     return a1+100
+...
+>>> f3(10)
+110
+>>> f4 = lambda a1:a1+100
+>>> f4(10)
+110
+>>>
+>>> def f5():
+...     n = input('Enter n value:')
+...     n = int(n)
+...     return n+100
+...
+>>> f5()
+Enter n value:45
+145
+>>>
+>>>
+>>> m=0.2
+>>> x=150
+>>> c=1
+>>>
+>>> def f(x):
+...     return m*x+c
+...
+>>> f(x)
+31.0
+>>>
+>>> F = lambda x:m*x+c
+>>> F(x)
+31.0
+>>>
+>>>
+>>> def f(x,c):
+...     return m*x+c
+...
+>>> f(10,2)
+4.0
+>>>
+>>>
+>>> F=lambda x,c:m*x+c
+>>> F(10,2)
+4.0
+>>>
+
+####################  End of the DAY7 ###########################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
