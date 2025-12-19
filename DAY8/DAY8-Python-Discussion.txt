@@ -1,0 +1,528 @@
+Python Programming
+---------------------
+1. Procedure style - direct approach 
+   ---------------------------------
+	|->understand syntax 
+	|->logical skill
+	|->native types + operators + conditional + loop
+	..
+
+2. Object Oriented Style 
+   ----------------------
+	|-> class <-> object
+	   ------------------//
+
+	|->methods
+		|->special methods 
+		|->decorator - adding new features to an existing code
+			
+	|->Inheritance 
+	|->Overloading 
+
+3. Functional Style 
+   ------------------
+	|->Expression style (or) Single line code  // Computation (or) Expression 
+===========================================================================================================
+
+Functional Style Programming
+------------------------------
+ -> Expression style 
+ -> The entire block of code - we can write in one line (Single Line) 
+ -> High order programming
+    =======================
+	|-> function(anotherFunction) 
+			......
+
+  |
+  |-> 1. lambda 
+  |-> 2. list comprehension 
+  |-> 3. generator 
+  |-> 4. map(),filter() 
+
+
+1. lambda - unnamed function
+------------------------------
+lambda <list of args> : <basicOperation> 
+
+f = lambda a1,a2:a1+a2
+f(10,20) ->30
+
+2. list comprehension 
+------------------------
+	|->list Append operation
+
+  [ final_value for iterable ]
+		-----(1)---
+   ----(2)------ 
+
+
+
+>>> L = []
+>>> for var in [10,20,30,40,50]:
+...     r = var+100
+...     L.append(r)
+...
+>>> L
+[110, 120, 130, 140, 150]
+>>>
+>>> [var+100 for var in [10,20,30,40,50]]
+[110, 120, 130, 140, 150]
+>>>
+>>> d={}
+>>> d['K1'] =  [var+100 for var in [10,20,30,40,50]]
+>>> d
+{'K1': [110, 120, 130, 140, 150]}
+>>>
+>>>
+>>> L = []
+>>>
+>>> L=[]
+>>> for var in [10,20,30,40,50]:
+...     if(var >30):
+...             r = var+100
+...             L.append(r)
+...     else:
+...             r = var+500
+...             L.append(r)
+...
+>>> L
+[510, 520, 530, 140, 150]
+>>>
+>>>
+>>> [var+100 if var >30 else var+500 for var in [10,20,30,40,50]]
+[510, 520, 530, 140, 150]
+>>>
+
+
+3. generator 
+---------------
+|->Function returns an iterator
+	            -------------
+			|->Address
+
+
+def fx():
+    return 10 // this function fx - returns a value //This is not an address
+    ......
+
+
+def fy():
+    yield 10 //this function fy - returns an iterator(Address)
+    .....
+	  
+generator
+ |->Address 
+	|--->1. next() ==> next(generator_object) ->Value1,...ValueN..StopIteration 
+	
+ 		<or>
+			
+ 	|--->2. for loop => for variable in generator_object:
+					...
+		<or>
+
+	|--->3. typecast to list ==> list(generator_object)
+
+>>> def fx():
+...     return 10
+...
+>>> def fy():
+...     yield 10
+...
+>>>
+>>> type(fx)
+<class 'function'>
+>>> type(fy)
+<class 'function'>
+>>>
+>>> type(fx())
+<class 'int'>
+>>>
+>>> type(fy())
+<class 'generator'>
+>>>
+>>>
+>>> fx()
+10
+>>> fy()
+<generator object fy at 0x000001F38A509A80>
+>>>
+>>>
+>>> def fy():
+...     yield 10
+...     yield 20
+...     yield 30,40
+...     yield 10+20*45
+...     yield "Data1","Data2"
+...     yield "D1",["R1","R2"],["R3","R4"]
+...
+>>> fy()
+<generator object fy at 0x000001F38A5F5E00>
+>>>
+>>> gen_obj = fy()
+>>> print(next(gen_obj))
+10
+>>> print(next(gen_obj))
+20
+>>> print(next(gen_obj))
+(30, 40)
+>>> print(next(gen_obj))
+910
+>>> print(next(gen_obj))
+('Data1', 'Data2')
+>>> print(next(gen_obj))
+('D1', ['R1', 'R2'], ['R3', 'R4'])
+>>> print(next(gen_obj))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+>>>
+>>>
+>>> gen_obj = fy()
+>>>
+>>> for var in gen_obj:
+...     print(var)
+...
+10
+20
+(30, 40)
+910
+('Data1', 'Data2')
+('D1', ['R1', 'R2'], ['R3', 'R4'])
+>>>
+>>>
+>>> gen_obj = fy()
+>>>
+>>> list(gen_obj)
+[10, 20, (30, 40), 910, ('Data1', 'Data2'), ('D1', ['R1', 'R2'], ['R3', 'R4'])]
+>>>
+>>>
+>>>
+------------------------------------------------------
+map()
+------
+
+map(Function,Collection) --> Generator 
+	|	|
+	|	inputCollection
+	lambda
+	......
+
+
+filter()
+-----------
+filter(Function,Collection) --> Generator 
+	|	|
+	|	inputCollection
+	lambda
+	......
+
+
+
+>>> L = []
+>>>
+>>> def f1(a):
+...     return a+100
+...
+>>> for var in [10,20,30,40,50]:
+...      r = f1(var)
+...      L.append(r)
+...
+>>> L
+[110, 120, 130, 140, 150]
+>>>
+>>>
+>>> map(lambda a:a+100,[10,20,30,40,50])
+<map object at 0x000002186C0317E0>
+>>>
+>>> list(map(lambda a:a+100,[10,20,30,40,50]))
+[110, 120, 130, 140, 150]
+>>>
+>>>
+>>> list(map(lambda a:a >30,[10,20,30,40,50]))
+[False, False, False, True, True]
+>>>
+>>> list(filter(lambda a:a >30,[10,20,30,40,50]))
+[40, 50]
+>>>
+=====================================================================================================
+
+Object Oriented Programming
+---------------------------
+
+class
+object
+|
+method
+
+
+class - type -> code block - set of attributes
+				    -----------//variable,function
+
+	-> python user defined class is mutable 
+					========
+				----------------
+				|->using class name - we can add new attribute
+						      we can modify an existing attribute
+						      we can delete nth attribute
+	-> blueprint of real object
+
+
+class className:
+      ---------
+	|->user defined name
+	   =================
+	set of attributes
+
+class product:
+	pid = 101
+	pname = 'pA'
+	pcost = 1000
+	pinfo = ['Ms.XYZ','GST123','V101']
+	T = ('D1','D2')
+	d = {'K1':'V1'}	
+	--------------------------------------------// class attribute
+
+How to access class attributes from outside the class ?
+
+className.<attribute>
+---------  ==========
+product.pid ->101
+product.pname ->'pA'
+product.pcost->1000
+product.pinfo[0] -->Ms.XYZ
+product.T[0] -->"D1"
+product.d['K1'] ------->"V1"
+
+How to modify an existing attribute ?
+className.<attribute> = updatedValue
+
+product.pcost = 2000
+
+How to delete nth attribute from class?
+del(className.attribute)
+
+del(product.pcost)
+
+print(product.pcost) -->AttributeError 
+
+
+>>>
+>>> app = "demo"
+>>> print(app)
+demo
+>>> print(App)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'App' is not defined. Did you mean: 'app'?
+>>>
+>>> class box:
+...     box_id = 101
+...
+>>> box
+<class '__main__.box'>
+>>> box.box_id
+101
+>>>
+>>> box.Box_id
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: type object 'box' has no attribute 'Box_id'. Did you mean: 'box_id'?
+>>>
+>>>
+>>> print(type(box))
+<class 'type'>
+>>> print(type(int))
+<class 'type'>
+>>> print(type(float))
+<class 'type'>
+>>> print(type(list))
+<class 'type'>
+>>> print(type(str))
+<class 'type'>
+>>> print(type(dict))
+<class 'type'>
+>>> print(type(tuple))
+<class 'type'>
+>>> print(type(bool))
+<class 'type'>
+>>>
+>>>
+>>>
+>>> class student:
+...     student_ID = 101
+...
+>>> student.student_ID
+101
+>>> student.student_ID = 505
+>>> student.student_ID
+505
+>>> student.student_ID
+505
+>>> student.student_ID
+505
+>>> student.student_name
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: type object 'student' has no attribute 'student_name'. Did you mean: 'student_ID'?
+>>>
+>>> student.student_name = ""
+>>>
+>>> student.student_name
+''
+>>>
+
+Write a python program:
+---------------------
+create employee enrollment class
+ - initialize following attributes
+	emp_name
+	emp_id
+	emp_cost
+	emp_DOB
+
+ - using class - display emp details
+ |
+ - using class - update/modify emp_cost
+ - using class - display blood_group ->AttributeError
+ |
+ - initialize blood_group and display it.
+----------------------------------------------------------------
+
+In python - in side the class any variable (or) method/function starts with __ and ends with __
+
+ __variable__
+
+ __method()__
+--------------------// pre-defined class attributes 
+		       (or)
+		       inbuiltin class attributes
+
+__name__  => current module - default module - __main__ 
+
+__add__  
+__sub__
+__mul__
+..
+__gt__
+
+__len__
+
+__del__
+...
+
+dir(className) - list of all the attributes 
+--------------
+
+
+
+>>> __name__
+'__main__'
+>>>
+>>> va = 10
+>>> vb = 20
+>>>
+>>> va+vb
+30
+>>> va.__add__(vb)
+30
+>>> class mybox:
+...     box_id = 101
+...     box_name = 'abc'
+...
+>>> dir(mybox)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'box_id', 'box_name']
+>>>
+>>>
+>>> mybox.__doc__
+>>>
+>>> class box:
+...     '''this is about box class detailed docs'''
+...     box_id = 101
+...
+>>> box.__doc__
+'this is about box class detailed docs'
+>>>
+=======================================================================================
+class - type - blue print of an object
+|
+object - real entity 
+
+	
+		+---------------------+
+		| [] | |  (white)     |   <== blue print sheet - class 
+		|                     |
+		|	[]	      |
+		+---------------------+
+
+		|		   |
+		|		   |
+	+-------------------+	 +--------------------+
+	| []  |  |  (white) |    | []  |   | (white)  |
+   	|		    |	 |		      |  ...  <== object
+	|	 [ ]	    |	 |      [  ]          |
+	+-------------------+	 +--------------------+
+		Building-1		Building-2
+	     1st main			2nd main   <== memory 
+
+
+	
+>>> class box:
+...     box_id = 101
+...
+>>> box
+<class '__main__.box'>
+>>>
+>>> box()
+<__main__.box object at 0x0000019FFC682350>
+>>>
+>>> box()
+<__main__.box object at 0x0000019FFC682320>
+>>>
+>>> obj1 = box()
+>>> obj2 = box()
+>>>
+>>> type(obj1)
+<class '__main__.box'>
+>>> type(obj2)
+<class '__main__.box'>
+>>>
+>>> obj1.box_id
+101
+>>> obj2.box_id
+101
+>>> box.box_id
+101
+>>> box.box_id = 505 # using class name - initializing value
+>>> #################
+>>>
+>>> obj1.box_id
+505
+>>> obj2.box_id
+505
+>>> box.box_id
+505
+>>> obj1.box_id = 'B-501' # object based initialization
+>>>
+>>> obj1.box_id
+'B-501'
+>>> obj2.box_id
+505
+>>> box.box_id = 605 # using class name
+>>>
+>>> obj1.box_id
+'B-501'
+>>>
+>>> obj2.box_id
+605
+>>> obj2.box_id = 'B-601' # object based initialization
+>>>
+>>> box.box_id = 705
+>>> #########
+>>>
+>>> obj1.box_id
+'B-501'
+>>> obj2.box_id
+'B-601'
+>>>	
+	
+#################################  End of the Day8 Session ##########################
