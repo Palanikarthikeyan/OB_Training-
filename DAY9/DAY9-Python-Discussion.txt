@@ -1,0 +1,782 @@
+Recap
+------
+class - blueprint of an object
+			-------
+			  |->Real entity
+
+
+   +---------------------------+ 
+   | []                        |
+   |                 (white)   |
+   | []     |    |   []        |   <== blueprint - class Name 
+   +---------------------------+
+                             |
+   |                         |
+   |                         |____
+   |                             |
++---------------------+    +--------------+
+| []                 |     |[]     (white)|
+| []         (white) |     |[]  |   |     |
+|     |     |        |     |              |
++--------------------+     +--------------+
+1st Block	             2nd Block
+0x1234                          0x4567
+=======================================================================================
+
+>>>
+>>> def f1():
+...     pass
+...
+>>>
+>>> class box:
+...     def f2():
+...         pass
+...
+>>> obj = box()
+>>>
+>>> print(type(f1))
+<class 'function'>
+>>>
+>>> print(type(obj.f2))
+<class 'method'>
+>>>
+>>> print("Hello")
+Hello
+>>>
+>>> s="abc"
+>>> s.upper()
+'ABC'
+>>> # class str:
+>>> #   def upper()
+>>>
+>>>
+>>>
+>>> def f1():
+...     print("Hello")
+...
+>>>
+>>> f1()
+Hello
+>>>
+>>> class box:
+...     def f2():
+...             print("Hello")
+...
+>>> obj = box()
+>>>
+>>> obj.f2()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: box.f2() takes 0 positional arguments but 1 was given
+>>>
+>>> class box:
+...     bid = 101
+...     def f2():
+...             print("Hello")
+...
+>>> obj = box()
+>>> obj.bid
+101
+>>> obj.f2()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: box.f2() takes 0 positional arguments but 1 was given
+>>>
+>>> # +---------------------+
+>>> # |    box - class
+>>> # +---------------------+
+>>> # |    bid
+>>> # |    f2
+>>> # |
+>>> # +---------------------+
+>>>
+>>>
+>>>
+>>>
+>>> # obj.f2() --> f2(obj)
+>>>
+>>>
+>>> def fx():
+...     print("Hello")
+...
+>>> fx()
+Hello
+>>> fx(100)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: fx() takes 0 positional arguments but 1 was given
+>>>
+
+>>> obj.f2()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: box.f2() takes 0 positional arguments but 1 was given
+>>>
+>>>
+>>> # obj.f2(10,20,30) --->f2(obj,10,20,30)
+>>>
+>>> class box:
+...     def f1(self):
+...             print("self=",self)
+...
+>>> obj1 = box()
+>>> obj1
+<__main__.box object at 0x000001D525F51780>
+>>>
+>>> obj1.f1()
+self= <__main__.box object at 0x000001D525F51780>
+>>>
+>>> # obj1.f1() -->f1(obj1)
+>>>
+>>>
+>>> def f1(a):
+...     print(type(a),a)
+...
+>>> f1(10)
+<class 'int'> 10
+>>>
+>>> f1(10.0)
+<class 'float'> 10.0
+>>>
+>>> f1('data')
+<class 'str'> data
+>>>
+
+>>>
+>>>
+>>> class box:
+...     box_id = 101
+...     def f1(self,a1):
+...             print(self.box_id)
+...             self.box_id = a1
+...
+>>> obj1 = box()
+>>> obj1.box_id
+101
+>>> obj1.f1('B-001')
+101
+>>> obj1.box_id
+'B-001'
+>>>
+>>>
+>>> obj2 = box()
+>>> obj2.box_id
+101
+>>> obj2.f1('B-002')
+101
+>>> obj2.box_id
+'B-002'
+>>>
+
+
+
+class DBI:
+	def connect(self,....):
+	   ''' establish db connection '''
+
+	def method1(self):
+	    '''Query1'''
+
+	def method2(self):
+	   '''Query2'''
+
+
+obj = DBI()
+obj.connect() # DB - connection establishment 
+obj.method1() # query1 
+obj.method2() # query2
+
+
+## 1. OOPs ways
+## 2. DB 
+
+As DB --> DB Connection ->Query
+
+obj = DBI()
+obj.method1()
+---============//DB Connection is not done - operation failed 
+
+|
+constructor ---->   __init__() <--- special method 
+		    # initialization purpose 
+		    # 
+
+
+################################################################################################
+
+pre-defined methods
+
+__init__
+
+__del__  => del(object) del(variable) 
+
+
+__str__ => str(object)
+
+
+>>>
+>>> class box:
+...     def __init__(self,a=0):
+...             self.a = a
+...     def __str__(self):
+...             return str(self.a)
+...     def __del__(self):
+...             del(self.a)
+...
+>>>
+>>> obj = box(45)
+>>> str(obj)
+'45'
+>>> obj.__str__()
+'45'
+>>> str(obj)
+'45'
+>>> del(obj)
+>>> obj.a
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'obj' is not defined
+>>>
+>>> va = 120
+>>> va
+120
+>>> del(va)
+>>> va
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'va' is not defined
+>>>
+
+
+>>>
+>>> class box:
+...     def __init__(self,a=0):
+...             self.a = a
+...     def __str__(self):
+...             return str(self.a)
+...     def __del__(self):
+...             del(self.a)
+...
+>>>
+>>> obj = box(45)
+>>> str(obj)
+'45'
+>>> obj.__str__()
+'45'
+>>> str(obj)
+'45'
+>>> del(obj)
+>>> obj.a
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'obj' is not defined
+>>>
+>>> va = 120
+>>> va
+120
+>>> del(va)
+>>> va
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'va' is not defined
+>>>
+>>>
+>>> len(obj)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'obj' is not defined
+>>>
+>>>
+>>> class box:
+...     def __init__(self):
+...             print("Hello")
+...
+>>> obj = box()
+Hello
+>>>
+>>> len(obj)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: object of type 'box' has no len()
+>>>
+>>>
+>>> class box:
+...     def __init__(self):
+...             print("Hello")
+...     def __len__(self):
+...             return 10
+...
+>>> obj = box()
+Hello
+>>> len(obj)
+10
+>>>
+>>>
+>>> dir(int)
+['__abs__', '__add__', '__and__', '__bool__', '__ceil__', '__class__', '__delattr__', '__dir__', '__divmod__', '__doc__', '__eq__', '__float__', '__floor__', '__floordiv__', '__format__', '__ge__', '__getattribute__', '__getnewargs__', '__gt__', '__hash__', '__index__', '__init__', '__init_subclass__', '__int__', '__invert__', '__le__', '__lshift__', '__lt__', '__mod__', '__mul__', '__ne__', '__neg__', '__new__', '__or__', '__pos__', '__pow__', '__radd__', '__rand__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__', '__rmul__', '__ror__', '__round__', '__rpow__', '__rrshift__', '__rshift__', '__rsub__', '__rtruediv__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__trunc__', '__xor__', 'as_integer_ratio', 'bit_count', 'bit_length', 'conjugate', 'denominator', 'from_bytes', 'imag', 'numerator', 'real', 'to_bytes']
+>>>
+>>>
+>>>
+>>> va = 10
+>>> vb = 20
+>>>
+>>> va+vb
+30
+>>> va.__add__(vb)
+30
+>>> len(va)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: object of type 'int' has no len()
+>>>
+>>> "__add__" in dir(int)
+True
+>>> "data" in ["data","abc","xyz"]
+True
+>>>
+>>> "test1" in ["data","abc","xyz"]
+False
+>>>
+>>> "__len__" in dir(int)
+False
+>>>
+>>> "__len__" in dir(str)
+True
+>>> s='abcd'
+>>> len(s)
+4
+>>> s=''
+>>> len(s)
+0
+>>> # obj.methodCall() ====> obj() // objectCall
+>>>
+>>>
+>>> class box:
+...     def __init__(self):
+...             self.va = 10
+...     def __call__(self):
+...             return self.va
+...
+>>> obj = box()
+>>>
+>>> obj()
+10
+>>> callable(obj)
+True
+>>>
+>>>
+>>> class box:
+...     def __init__(self):
+...             self.va = 10
+...
+>>> obj = box()
+>>> obj()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'box' object is not callable
+>>>
+>>> callable(obj)
+False
+>>>
+>>>
+>>> def f1():
+...     print("Hello")
+...
+>>> callable(f1)
+True
+>>> type(f1)
+<class 'function'>
+>>>
+>>> f1()
+Hello
+>>> f1.__call__()
+Hello
+>>>
+
+
+>>>
+>>> i=10
+>>> print(i)
+10
+>>>
+>>> s="Hello"
+>>> type(s)
+<class 'str'>
+>>>
+>>> type(i)
+<class 'int'>
+>>> type(10)
+<class 'int'>
+>>>
+>>> i=10
+>>> j=int(20)
+>>>
+>>> type(i)
+<class 'int'>
+>>> type(j)
+<class 'int'>
+>>>
+>>> i+j
+30
+>>> k=int()
+>>> k
+0
+>>> s1=str('hello')
+>>> s1
+'hello'
+>>>
+>>> s2=str()
+>>> s2
+''
+>>> L1=[]
+>>>
+>>> L2=list()
+>>> L2
+[]
+>>> d=dict()
+>>> d
+{}
+>>> i=int(20)
+>>>
+>>> # class int:
+>>> #   def __init__(self,a=0):
+>>>
+>>>
+>>> j = int()
+>>> j
+0
+>>>
+
+
+starts with double underscore followed by name # Note not ends with double underscore
+
+class box:
+   __va = 10 <== user defined private attribute
+   __vb = 20 <== user defined private attribute
+   def __f1(self): <== user defined private attribute 
+	...
+
+
+
+>>>
+>>> i=10
+>>> print(i)
+10
+>>>
+>>> s="Hello"
+>>> type(s)
+<class 'str'>
+>>>
+>>> type(i)
+<class 'int'>
+>>> type(10)
+<class 'int'>
+>>>
+>>> i=10
+>>> j=int(20)
+>>>
+>>> type(i)
+<class 'int'>
+>>> type(j)
+<class 'int'>
+>>>
+>>> i+j
+30
+>>> k=int()
+>>> k
+0
+>>> s1=str('hello')
+>>> s1
+'hello'
+>>>
+>>> s2=str()
+>>> s2
+''
+>>> L1=[]
+>>>
+>>> L2=list()
+>>> L2
+[]
+>>> d=dict()
+>>> d
+{}
+>>> i=int(20)
+>>>
+>>> # class int:
+>>> #   def __init__(self,a=0):
+>>>
+>>>
+>>> j = int()
+>>> j
+0
+>>> class login:
+...     user_name = 'root'
+...     password='my@245'
+...
+>>> obj = login()
+>>>
+>>> obj.user_name
+'root'
+>>> obj.password
+'my@245'
+>>>
+>>>
+>>> class login:
+...     user_name = "root"
+...     __password = "my@1234"
+...
+>>> obj = login()
+>>> obj.user_name
+'root'
+>>>
+>>> obj.__password
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'login' object has no attribute '__password'
+>>>
+>>> dir(login)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_login__password', 'user_name']
+>>>
+>>> class box:
+...     '''this is box class'''
+...     va = 10
+...     def fx(self):
+...             pass
+...
+>>> box.__dict__
+mappingproxy({'__module__': '__main__', '__doc__': 'this is box class', 'va': 10, 'fx': <function box.fx at 0x000001894D327370>, '__dict__': <attribute '__dict__' of 'box' objects>, '__weakref__': <attribute '__weakref__' of 'box' objects>})
+>>>
+>>> box.__doc__
+'this is box class'
+>>>
+>>> class login:
+...     user_name = "root"
+...     __password = "Welcome!234"
+...
+>>> obj = login()
+>>> obj.__password
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'login' object has no attribute '__password'
+>>>
+>>> login.__dict__
+mappingproxy({'__module__': '__main__', 'user_name': 'root', '_login__password': 'Welcome!234', '__dict__': <attribute '__dict__' of 'login' objects>, '__weakref__': <attribute '__weakref__' of 'login' objects>, '__doc__': None})
+>>>
+>>>
+>>> obj._login__password
+'Welcome!234'
+>>>
+----------------------------------------------------------------------------------------------------------
+
+decorator
+---------
+  |-> Function 
+  |-> Higher order programming ==> fx(f1)
+
+  |-> meta programming  --- adding new features to an existing code.
+			    |______________________________________|
+
+ Ex: 
+ ---
+          python_Code --->App-1 ===> V1.0 -->R+ 
+
+	  python_Code ---->App-2 ===> V1.1 --->R+  
+
+Web development 
+----------------> [Home] [AboutUs] [News]    [ContactUs]
+				    |->City1
+				    |->City2
+
+
+
+Web development 
+----------------> [Home] [AboutUs] [News]    [ContactUs]
+				    |->City1
+				    |->City2
+				    |->City3 <== new feature 
+
+
+
+Web development 
+----------------> [Home] [AboutUs] [News]     [Service] [ContactUs]
+				    |->City1
+				    |->City2
+				    |->City3 
+				    |->City4 <== new feature
+
+
+
+def decoratorFunction(new_feature_Function):
+	def wrapperFunction():
+		new_feature_Function()
+	return wrapperFunction
+
+
+def city3():
+	....
+	....
+	....
+
+r = decoratorFunction(city3)
+r() 
+--------------------------------
+
+@decoratorFunction
+def new_feature_Function():
+	...
+	...
+	...
+
+new_feature_Function() 
+-----------------------------
+ |-> same as   
+def city3():
+	....
+	....
+	....
+
+r = decoratorFunction(city3)
+r() 
+
+>>>
+>>> def news(a):
+...     def wrapper():
+...             a()
+...     return wrapper
+...
+>>>
+>>> @news
+... def city1():
+...     print("<h2> City1 news page </h2>")
+...
+>>> @news
+... def city2():
+...     print("<h3> City2 news page</h3>")
+...
+>>> city1()
+<h2> City1 news page </h2>
+>>> city2()
+<h3> City2 news page</h3>
+>>>
+>>>
+>>> @news
+... def city3():
+...     print("<h2>City3 News Page</h2>")
+...
+>>>
+>>> city3()
+<h2>City3 News Page</h2>
+>>>
+=======================================================================================================
+
+
+
+
+
+@classmethod <== builtin decorator 
+------------
+
+@classmethod
+def class_method_name():
+	pass
+
+className.class_method_name()
+========= --------------------- Vs obj.method_name()
+|____________________|
+     |
+className.method() --> method(className)
+			|
+			@classmethod
+			def method(cls):
+				   ===
+				   
+
+
+
+
+
+>>>
+>>> class product:
+...     pid = 101
+...     pname = 'demo1'
+...
+>>> product.pid
+101
+>>> product.pname
+'demo1'
+>>> product.pid = 102
+>>> product.pid
+102
+>>> product.pid
+102
+>>> product.pcost = 1000 # new attribute
+>>> product.pcost
+1000
+>>> class product:
+...     pid = 101
+...     @classmethod
+...     def f1(cls):
+...             print(cls) # className - product
+...             print(cls.pid) # product.pid ->101
+...             cls.pid = 102  # product.pid = 102
+...
+>>> product.pid
+101
+>>> product.f1() # f1(product)
+<class '__main__.product'>
+101
+>>> product.pid
+102
+>>> obj = product()
+>>> obj.pid
+102
+>>> obj.pid = "p-505" # object based initialization
+>>> obj.pid
+'p-505'
+>>>
+>>> obj1 = product()
+>>> obj1.pid
+102
+>>> obj1.pid = "p-605" # object based initialization
+>>> obj1.pid
+'p-605'
+>>>
+
+
+
+>>>
+>>> class product:
+...     pid = 101
+...     @classmethod
+...     def f1(cls):
+...             print("This is classmethod")
+...             print(cls.pid) # we can access class attribute
+...             cls.pid = 505 # we can modify class attribute
+...     def method1(self):
+...             print(self.pid) # we can access class attribute
+...     @staticmethod
+...     def method2():
+...             print("display -> date/time")
+...             import time
+...             print(time.ctime())
+...
+>>> obj = product()
+>>> obj.pid #### ----------->
+101
+>>> product.f1()
+This is classmethod
+101
+>>> obj.pid #### --->
+505
+>>> product.method2()
+display -> date/time
+Tue Dec 23 21:21:05 2025
+>>> obj.method2()
+display -> date/time
+Tue Dec 23 21:21:10 2025
+>>>
+#################################### End of the day9 ##############################################
+
+
+
+
