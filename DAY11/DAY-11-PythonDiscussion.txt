@@ -1,0 +1,568 @@
+Module and Package
+pip
+os
+sys
+=============================================
+
+Recap
+------
+variable
+str
+list
+..
+function
+..
+oops
+ - class
+ - ..
+ - ..
+=============================================
+Module
+-------
+ |->Existing python code 
+ |->Reusability 
+     ---------
+       |->reuse an existing code(variable,function,class etc.,)
+
+ |-> import <moduleName>
+     <moduleName>.<member>
+			|->variable,class...
+
+
+ |-> file: ab.py
+     =============================================
+     port=5000
+     app="Flask"
+
+     def display():
+         print("<h2>Welcome to webApp</h2>")
+    =============================================
+
+|-> python ab.py {Enter}
+    <empty>
+
+|-> file: p1.py                 file: p2.py
+    ------------                ==============
+    import ab                    import ab
+    print(ab.app,ab.port)        ab.display()
+   ---------------              ================
+    Flask 5000                   Welcome to webApp 
+
+|-> E:\>
+      |--> ab.py
+      |--> p1.py
+      |--> p2.py
+ 
+|->E:\>python {Enter}
+
+  >>> import ab
+  >>> 
+  >>> help(ab) 
+  >>>
+  >>> ab.app 
+  Flask
+  >>> ab.port
+  5000
+  >>>
+  >>> ab.display()
+  Welcome to webApp
+  >>> 
+  >>> 
+  >>> display()
+  NameError 
+  >>> port     Vs ab.port ->5000
+  NameError
+  >>> exit()
+
+ E:\>
+  |----> ab.py  
+  |----> p1.py 
+  |----> p2.py
+  |----> D1/
+          |--->p3.py
+	       =====
+		|
+		import ab ---------> ModuleNotFound -- exit 
+		print(ab.port)
+ 
+  
+
+C:\Users\karth\D1>notepad ab.py
+
+C:\Users\karth\D1>dir
+ Volume in drive C is OS
+ Volume Serial Number is 3E30-0B4D
+
+ Directory of C:\Users\karth\D1
+
+06-01-2026  19:21    <DIR>          .
+05-01-2026  21:17    <DIR>          ..
+06-01-2026  19:22                24 ab.py
+28-11-2025  10:06    <DIR>          D2
+28-11-2025  10:06               306 p1.log
+               2 File(s)            330 bytes
+               3 Dir(s)  721,864,179,712 bytes free
+
+C:\Users\karth\D1>cd D2
+
+C:\Users\karth\D1\D2>dir
+ Volume in drive C is OS
+ Volume Serial Number is 3E30-0B4D
+
+ Directory of C:\Users\karth\D1\D2
+
+28-11-2025  10:06    <DIR>          .
+06-01-2026  19:21    <DIR>          ..
+28-11-2025  10:06    <DIR>          D3
+               0 File(s)              0 bytes
+               3 Dir(s)  721,864,175,616 bytes free
+
+C:\Users\karth\D1\D2>python
+Python 3.10.0 (tags/v3.10.0:b494f59, Oct  4 2021, 19:00:18) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import ab
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'ab'
+>>> exit()
+
+C:\Users\karth\D1\D2>cd ..
+
+C:\Users\karth\D1>dir
+ Volume in drive C is OS
+ Volume Serial Number is 3E30-0B4D
+
+ Directory of C:\Users\karth\D1
+
+06-01-2026  19:21    <DIR>          .
+05-01-2026  21:17    <DIR>          ..
+06-01-2026  19:22                24 ab.py
+28-11-2025  10:06    <DIR>          D2
+28-11-2025  10:06               306 p1.log
+               2 File(s)            330 bytes
+               3 Dir(s)  721,864,175,616 bytes free
+
+C:\Users\karth\D1>python
+Python 3.10.0 (tags/v3.10.0:b494f59, Oct  4 2021, 19:00:18) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import ab
+>>>
+>>> type(ab)
+<class 'module'>
+>>>
+========================================================
+C:\Users\karth\D1>python
+Python 3.10.0 (tags/v3.10.0:b494f59, Oct  4 2021, 19:00:18) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import ab
+>>>
+>>> type(ab)
+<class 'module'>
+>>>
+>>> ab.port
+1234
+>>> ab.app
+'testApp'
+>>>
+>>> help(ab)
+Help on module ab:
+
+NAME
+    ab
+
+DATA
+    app = 'testApp'
+    port = 1234
+
+FILE
+    c:\users\karth\d1\ab.py
+
+
+>>>
+========================================================  
+
+import <moduleName> {Enter}
+	..........
+	|
+	refer this sys.path -> list of module path directories  (1)
+		   ========    ----
+
+			|
+			filename.py -->filename.pyc //bytecode <-- pvm 
+				       ............. (2)
+					.....	
+
+python 3.x ===>  __pycache__/
+			  filename.pyc
+
+
+import sys
+sys.path.append("C:\\Users\\karth\\D1")
+
+import ab
+print(ab.port)
+print(ab.app)
+--------------------------------------------------
+env variable => PYTHONPATH <-- builtin variable
+		C:\\Users\\karth\\D1 <-- path
+|
+open new commandline 
+|
+C:\users\karth> python {Enter}
+>>> 
+>>> import sys
+>>> sys.path
+
+
+Linux os
+-----------
+ |-> vi ~/.bashrc {enter}
+	    |
+	export PYTHONPATH="/home/karth/D1/"
+	
+     :wq
+
+ |-> source ~/.bashrc {Enter}
+
+ |-> echo $PYTHONPATH 
+ |-> env|grep -i PYTHONPATH
+
+------------------------------------------------------------------------------
+sys
+---
+ |->python information
+
+os
+---
+ |->os information
+
+json
+----
+ |->json data
+
+...
+...
+...
+
+file: p1.py
++---------------------------+
+import sys
+print(sys.argv[0])  # p1.py
+print(sys.argv[1])  # D1
+print(sys.argv[2])  # D2
+print(sys.argv[3])  # D3
++---------------------------+
+python p1.py D1 D2 D3 {Enter}
+       ---------------
+	sys.argv //list
+
+
+file: p1.py
++---------------------------+
+import sys
+print(sys.argv[0])  # p1.py
+print(sys.argv[1])  # empty
+print(sys.argv[2])  # empty
+print(sys.argv[3])  # empty
++---------------------------+
+python p1.py  {Enter}
+       ---------------
+	sys.argv //list
+
+=============================================================================
+
+Write a python program
+use commandline argument - pass any two digits
+calculate sum of two digits and display sum value
+|
+Validation:
+   - commandline args - empty => display message commandline argument is empty
+   - commandline args - more than 2 (or) less than 2 args - display suitable message
+  
+
+==============================================================================
+
+import os
+Python 3.10.0 (tags/v3.10.0:b494f59, Oct  4 2021, 19:00:18) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+
+import os
+os.system("whoami")
+0
+
+
+os.system("powershell sleep 10")
+0
+
+os.system("date")
+0
+
+os.popen("whoami")
+<os._wrap_close object at 0x000001C76D0C5870>
+obj=os.popen("whoami")
+obj.read()
+'paka\\karth\n'
+
+s="data\n"
+s.strip()
+'data'
+
+login_name = os.popen("whoami").read()
+login_name
+'paka\\karth\n'
+
+login_name.strip()
+'paka\\karth'
+login_name = os.popen("whoami").read().strip()
+
+login_name
+'paka\\karth'
+
+
+>>> os.listdir(".")
+['D3', 'pa.py']
+>>>
+>>> len(os.listdir("C:\\Users\\karth\\"))
+234
+>>>
+
+>>>
+>>> os.getcwd()
+'C:\\Users\\karth\\D1\\D2'
+>>> os.chdir("..") # cd ..
+>>> os.getcwd()
+'C:\\Users\\karth\\D1'
+>>>
+>>> os.walk("C:\\Users\\karth\\D1")
+<generator object _walk at 0x000001C35BBE2C00>
+>>>
+>>> for var in os.walk("C:\\Users\\karth\\D1"):
+...     print(var)
+...
+('C:\\Users\\karth\\D1', ['D2', '__pycache__'], ['ab.py', 'p1.log'])
+('C:\\Users\\karth\\D1\\D2', ['D3'], ['pa.py'])
+('C:\\Users\\karth\\D1\\D2\\D3', ['D4'], ['test.log'])
+('C:\\Users\\karth\\D1\\D2\\D3\\D4', [], ['r1.log', 'test.log'])
+('C:\\Users\\karth\\D1\\__pycache__', [], ['ab.cpython-310.pyc'])
+>>>
+
+To install python module - on the commandline
+===============================================
+C:\> pip install <moduleName>
+     ---
+
+file: my_demo_html_code.py
+----  =============================
+def index():
+    return "<h1> Display index page</h1>"
+-----------------------------------------------
+
+import my_demo_html_code
+my_demo_html_code.index()
+
+import my_demo_html_code as <userdefinedName>
+				|
+				symbolic name of imported module
+
+import my_demo_html_code as mymodule
+
+mymodule.index()
+==========================================================
+
+TradingApp/ <== directory
+      |----> p1.py p2.py p3.py ... p50.py
+
+      |----> S1/
+              |-->p51.py p52.py
+
+      |----> S2/
+	      |-->p53.py 
+	      |-->S3/
+		   |-->p54.py
+
+	
+---------------
+To run this TradingApp 
+
+import p1
+import p2
+import p3
+..
+..
+import S1.p51
+import S1.p52
+...
+...
+--------------------
+
+Package design
+----------------
+ |-> Folder (or) Directory
+
+Commandline steps
+==================
+Step 1: Create a project directory
+|
+Step 2: Collect all the python files into project directory
+	(copy)		
+|
+Step 3: Create a package initialization file __init__.py <== special file
+					     ============
+|
+Step 4: import all the external symbols to __init__.py file
+	
+|
+Step 5: Test your project directory (ex: import TradingApp )
+
++-----------------------------------------------------------+
+| file: sab.py                 file: p1.py
+|----------------              ============
+|  var=120                      import sab
+|  def fx():                    print(sab.var)  ->120 Vs print(var) ->NameError
+|     return True               sab.fx() ->True Vs fx() ->NameError
+|                               myvar = 130
+|  def fy():                    print(myvar)
+|     print("Hello")          ================
+|
++---------|--------------------------------------------------+
+	 
+ __main__.var | 120             sab.var        | 120
+ =============|=========        ===============|======
+ __main__.fx  | 0x1234          __main__.myvar | 130
+ =============|=========       =======================
+ __main__.fy  | 0x3445          sab.fx         | 0x1234
+ =============|=========       ==========================
+
+
+import <filename>
+	|->module 
+<module>.member
+
+import sab
+sab.var 
+
+from <module> import <member>
+	|
+
+from <d1>.<d2>.<d3>.<d4>.<module> import <members>
+      ................... =======        =========
+
+from sab import var
+print(var)
+
+### 
+userA@host~]$ ls
+a.txt
+userA@host~]$ cat a.txt
+OK
+
+userA@host~]$ cat passwd
+No such File ->Error
+
+userA@host~]$ cat /etc/passwd     <== import os
+OK                                    os.system("whoami") 
+
+userA@host~]$ cp /etc/passwd .
+userA@host~]$ cat passwd            <=== from os import system
+OK                                       system("whoami") 
+
+>>> import os
+>>> os.system("whoami")
+paka\karth
+0
+>>> os.getcwd()
+'C:\\Users\\karth'
+>>>
+>>> getcwd()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'getcwd' is not defined
+>>>
+>>> from os import getcwd
+>>> getcwd()
+'C:\\Users\\karth'
+>>>
+>>> system("whoami")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'system' is not defined
+>>>
+>>>
+
+========================================================================
+PS C:\Users\karth> cat .\ERP\sales.py
+def count():
+        print("Total no.of sales count:120")
+PS C:\Users\karth> cat .\ERP\prod.py
+def fx():
+        print("production details")
+
+def fy():
+        return "No.of product Count:500"
+PS C:\Users\karth> cat .\ERP\CRM\customer.py
+def display():
+        print("List of customer records")
+PS C:\Users\karth> cat .\ERP\__init__.py
+from ERP.sales import *
+from ERP.prod import fx,fy
+from ERP.CRM.customer import display
+PS C:\Users\karth>
+PS C:\Users\karth>
+PS C:\Users\karth> python
+Python 3.10.0 (tags/v3.10.0:b494f59, Oct  4 2021, 19:00:18) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+>>> import ERP
+>>>
+>>> ERP.count()
+Total no.of sales count:120
+>>> ERP.fx()
+production details
+>>> ERP.fy()
+'No.of product Count:500'
+>>> ERP.display()
+List of customer records
+>>>
+>>>
+>>> import os
+>>>
+>>> type(os)
+<class 'module'>
+>>> type(ERP)
+<class 'module'>
+>>>
+>>> os.__file__
+'C:\\Users\\karth\\AppData\\Local\\Programs\\Python\\Python310\\lib\\os.py'
+>>>
+>>>
+>>> ERP.__file__
+'C:\\Users\\karth\\ERP\\__init__.py'
+>>>
+
+
+
+
+
+
+
+
+
+
+
+			 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
