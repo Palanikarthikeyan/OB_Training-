@@ -1,0 +1,144 @@
+Task:1
+-------
+Write a python program:
+initialize a pin number (ex: pin=1234)
+|
+use while loop - limit 3
+     - read a pin Number from <STDIN>
+     - test input pin with an existing PIN
+     - both pin is success - display message pin is matched - count
+all 3 inputs are failed - pin is blocked.
+
+####
+|
++
+File Handling - create a new file - pin_history.log
+		append all user input details to pin_history.log file
+		------		(pin entry time date/time => import time
+							     time.ctime() )
+
+----
+Task:2
+-------
+create a function - pin_test 
+		    - operation block is Task1 code
+
+|
+module 
+|
+import a module run the pin_test code
+#######################################################################################
+
+def pin_test():
+    import time
+    fobj = open('my_pin_history.log','a')
+    pin = 1234
+    count = 0
+    while(count <3):
+        count = count + 1
+        p = input('Enter a pin Number:')
+        if(int(p) == pin):
+            fobj.write(f'Success pin is matched - {count} pin input date/time:{time.ctime()}\n')
+            print(f'Success pin is matched - {count}')
+            break
+        else:
+            fobj.write(f'Failed Sorry input pin:{p} is not matched. Pin input date/time:{time.ctime()}\n')
+    if(int(p) != pin):
+        print('Sorry your pin is blocked')
+        fobj.write(f'Sorry your pin is blocked - entry time is:{time.ctime()}\n')
+        fobj.close()
+        
+
+if __name__ == '__main__':
+    pin_test()
+
+
+C:\Users\karth\Karthik\UST-Global-Training\DAY12>python
+Python 3.10.0 (tags/v3.10.0:b494f59, Oct  4 2021, 19:00:18) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+>>> import demo35
+>>> demo35.pin_test()
+Enter a pin Number:1234
+Success pin is matched - 1
+>>> exit()
+
+C:\Users\karth\Karthik\UST-Global-Training\DAY12>python demo35.py
+
+C:\Users\karth\Karthik\UST-Global-Training\DAY12>python demo35.py
+Enter a pin Number:13334
+Enter a pin Number:1234
+Success pin is matched - 2
+
+C:\Users\karth\Karthik\UST-Global-Training\DAY12>python
+Python 3.10.0 (tags/v3.10.0:b494f59, Oct  4 2021, 19:00:18) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+>>> import demo35
+>>>
+>>> demo35.pin_test()
+Enter a pin Number:3434
+Enter a pin Number:3234
+Enter a pin Number:1234
+Success pin is matched - 3
+>>>
+>>> from demo35 import pin_test
+>>> pin_test()
+Enter a pin Number:1234
+Success pin is matched - 1
+>>> exit()
+
+C:\Users\karth\Karthik\UST-Global-Training\DAY12>
+			
+######################################################################################
+OOPs
+   +---------------+
+   |    X - org    |
+   +-----|----------+
+	 |
+	 |____ purchase the product from many vendors 
+	 |____ billing process
+
+	1st - vendor enrollment 		[V1]  [V2]  [V3] .. [Vn]
+	----	vendorName,GST
+	|
+	2nd - do billing_process 
+		  product details
+		  (productName,cost,Qty,18% of Tax,
+		    dispatch_Time,arrival time,Travel_Duration)
+		 V1
+		  |->pA |->1000 |->3
+
+		 V2
+		  |->pB ->1200 |->5
+		  |->pA ->690  |->3
+		  
+	19:49:00 - started ....		=>(A)
+	20:05:01 - reached/deliverd 	=>(B)
+	
+	Duration = B - A
+	
+	|-> Create - product_vendor log ->Append all the product details to log file.
+
+---------------------------------------------------------------------------------------
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

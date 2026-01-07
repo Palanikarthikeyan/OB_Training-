@@ -1,0 +1,41 @@
+Exercise 1: Temperature Converter (Basic)
+Problem
+Create a class Temperature that:
+Stores temperature in Celsius
+Provides a property to get and set temperature in Fahrenheit
+
+Requirements
+--------------
+Use @property for fahrenheit
+Setting fahrenheit should update the Celsius value
+######################################################################
+
+Exercise 2: Bank Account Balance Validation (Intermediate)
+Problem
+Create a BankAccount class that:
+Stores balance privately
+Prevents setting negative balance
+
+Requirements
+Use @property for balance
+Raise ValueError if balance < 0
+######################################################################
+Exercise 3: Student Marks with Read-Only Percentage (Advanced)
+Problem
+Create a Student class that:
+Stores marks for 3 subjects
+Calculates percentage automatically
+Percentage must be read-only
+Requirements
+Use @property for percentage
+Do NOT create a setter for percentage
+######################################################################
+Exercise 4: Payment System (Intermediate)
+Problem
+Create an abstract class Payment with an abstract method pay(amount).
+
+Implement:
+CreditCardPayment
+UPIPayment
+Each class should provide its own payment logic.
+######################################################################
