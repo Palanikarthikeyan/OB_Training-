@@ -1,0 +1,259 @@
+Task
+-----
+Reading a production.log file in python
+|
+Search for pattern (ERROR/WARNING) 
+|
+Extract Matched details
+|
+Insert matched data into DB(Sqlite3)
+========================================
+
+File: Production.log
+======================
+2026-01-08 10:15:23 INFO User login successful user_id=101
+2026-01-08 10:16:01 ERROR Database connection failed code=500
+2026-01-08 10:17:45 WARNING Disk usage high 81 %
+2026-01-08 10:18:10 ERROR Timeout occurred service=payment
+
+Database Design
+-----------------
+timestamp
+log_level
+message
+
+Create Table 
+|
+Read the log file - Search a pattern
+		    |
+		  Insert matched data to Database(use insert query)
+|
+Open new database - connection - Verify Inserted Data
+==================================================================================
+
+import sqlite3 
+
+conn = sqlite3.connect("prod.log")
+sth = conn.cursor()
+sth.execute('''create table logs (id INTEGER PRIMARY KEY AUTOINCREMENT,
+            log_time TEXT,
+            level TEXT,
+            message TEXT)''')
+
+fobj = open("C:\\Users\\Karth\\production.log","r")
+for var in fobj:
+    if('ERROR' in var):
+        L=var.split()
+        time_stamp = L[:2]
+        time_stamp="-".join(time_stamp)
+        Log_level = L[2]
+        Log_msg = "-".join(L[3:])
+        sth.execute("insert into logs (log_time,level,message) values(?,?,?)",(time_stamp,Log_level,Log_msg))
+fobj.close()
+conn.commit()
+conn.close()
+
+-------------------------------------------------------------------------------
+>>> import re
+>>>
+>>> # re.search()  - Search a pattern
+>>> # re.search(Pattern_String,Input_String,re.I) -> <ack/object>/None
+>>>
+>>> re.search("sales","101,raj,sales,pune")
+<re.Match object; span=(8, 13), match='sales'>
+>>>
+>>> re.search("prod","101,raj,sales,pune")
+>>>
+>>> re.search("SALES","101,raj,sales,pune")
+>>>
+>>>
+>>> re.search("SALES","101,raj,sales,pune",re.I)
+<re.Match object; span=(8, 13), match='sales'>
+>>>
+>>>
+>>> obj = re.search("SALES","101,raj,sales,pune",re.I)
+>>> obj.group()
+'sales'
+>>>
+>>> obj = re.search("SALES.*","101,raj,sales,pune",re.I)
+>>> obj.group()
+'sales,pune'
+>>>
+
+-------------------------------------------------------------------------------
+
+Design - 3 classes 
+-------------------
+1. LogParser  -> reads and parse - production.log
+2. DataBaseManager -> SQLite Operation
+3. LogProcessor -> parse + insert 
+
+1. LogParser  -> reads and parse - production.log
+==================================================
+  |-> Reading a log file
+  |-> Search a pattern
+  |-> Return matched data
+
+2. DataBaseManager
+====================
+DatabaseManager ->Create Table ->Insert Log 
+
+3. LogProcessor -> parse + insert 
+--------------------------------------
+LogProcessor 
+	|-> parser 
+	|-> databasemanager
+	|
+	|-> parse the matched content ->insert into DB(call insert_log)
+
+
+log_file = "production.log"
+db_file = "logs.db"
+
+parser = LogParser(log_file)
+
+db_manager = DatabaseManager(db_file)
+
+processor =LogProcessor(parser,db_manager)
+
+processor.process()
+
+
+db_manager.close()
+
+==========================================================================
+Create table 
+Insert data
+update data
+delete data
+
+Database - normalization
+		|-> Data is split into multiple tables
+					============
+	
+Join 
+-----
+|->Reduce redundancy 
+|->Improves consistency
+ 
+Emp table 
+ |->emp_id |->emp_name |->dept_id |->place
+Dept table 
+ |->dept_id |->dept_name
+
+select column_list from table1 join table2 on table1.common_column = table2.common_column;
+ 
+INNER JOIN 
+LEFT JOIN
+RIGHT JOIN
+CROSS JOIN
+SELF JOIN
+ 
+emp_table
+==========
+emp_id		emp_name		dept_id
+101		A			10
+102		B			20
+103		C			30
+104		D			NULL
+
+dept_table
+===========
+dept_id		dept_name
+10		dA
+20		dB
+30		dC
+
+select e.emp_name,d.dept_name from employee e INNER JOIN departments d ON e.dept_id = d.dept_id
+
+A  | dA
+B  | dB
+C  | dC
+
+D - is excluded because D has no department
+---
+
+Returns all rows from the left table, even if no match
+=========================================================
+select e.emp_name,d.dept_name from employee e LEFT JOIN departments d ON e.dept_id = d.dept_id;
+
+Return Cartesian product ( all combinations)
+===============================================
+select e.emp_name,d.dept_name from employee e CROSS JOIN departments d;
+
+
+=====================================================================================
+
+Logging module
+==============
+Logging - tracking events of software application(runs)
+-------
+ |->debugging ,analysis 
+		|->application crashes 
+
+ |->Logging levels
+    -------------
+     Debug	-   10
+     Info	-   20
+     Warning	-   30
+     Error      -   40
+     Critical   -   50
+
+import logging
+err_name = "security"
+logging.error("%s raised an error",err_name)
+
+
+1st -> import logging module
+
+2nd -> Configure logger - create a log file
+|
+3rd -> create an logger_object
+|
+4th -> set the threshold of logger 
+       =============================
+         
+|
+5th Log message - event messages
+
+logger_object.debug('Debug_Message')
+logger_object.info('Information')
+..
+
+import logging
+
+#logging.basicConfig(level=logging.INFO)
+#logging.basicConfig(filename="app.log",filemode="a",level=logging.INFO)
+logging.basicConfig(filename="app.log",filemode="a",level=logging.INFO,
+                    format="%(asctime)s - %(levelname)s - %(message)s")
+
+logging.info("App info")
+logging.error("DB failed")
+
+####################################################################################
+import logging
+logging.basicConfig(level=logging.ERROR)
+try:
+  ...
+except Exception:
+  logging.exception()
+
+####################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
