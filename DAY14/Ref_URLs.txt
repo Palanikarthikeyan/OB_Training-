@@ -1,0 +1,35 @@
+Python logging module reference (official docs)
+→ Comprehensive API & usage examples
+https://docs.python.org/3/library/logging.html
+
+Python Logging HOWTO (official tutorial)
+→ A beginner-friendly tutorial with examples
+https://docs.python.org/3.10/howto/logging.html
+
+Python Logging Cookbook (official recipes)
+→ More practical examples & advanced patterns
+https://docs.python.org/3/howto/logging-cookbook.html
+
+Community Tutorials
+
+Real Python: Logging in Python (in-depth tutorial)
+→ Explains basics, handlers, formatters, and best practices
+https://realpython.com/python-logging/
+
+GeeksforGeeks: Logging in Python
+→ Simple examples and configuration walkthrough
+https://www.geeksforgeeks.org/logging-in-python/
+
+Python 101 — Logging chapter
+→ Easy-to-follow beginner guide
+https://python101.pythonlibrary.org/chapter15_logging.html
+
+DevDungeon Tutorial on Python Logging
+→ Step-by-step practical guide
+https://www.devdungeon.com/content/python-logging-tutorial
+
+Optional (Alternative Logger Library)
+
+Loguru Python Logging Tutorial (DataCamp)
+→ If you want a simpler logging alternative to the stdlib
+https://www.datacamp.com/tutorial/loguru-python-logging-tutorial
