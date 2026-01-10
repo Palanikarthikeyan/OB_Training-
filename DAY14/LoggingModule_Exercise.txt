@@ -1,0 +1,73 @@
+Exercise 1: Basic Logger Setup
+
+Goal: Learn how to configure and use a basic logger.
+
+Task:
+
+Configure logging to:
+
+Log messages to the console
+
+Use INFO level
+
+Display timestamp, log level, and message
+
+Log the following messages:
+
+An INFO message when the program starts
+
+A WARNING message if a variable value is greater than 100
+
+An ERROR message if division by zero is attempted
+
+Concepts practiced:
+basicConfig, log levels, formatting
+
+======================================================================
+Exercise 2: Logging to a File
+
+Goal: Persist logs to a file.
+
+Task:
+
+Configure logging to write logs to app.log
+
+Log levels:
+
+DEBUG: Variable values inside a loop
+
+INFO: Successful completion of a task
+
+Ensure logs are appended, not overwritten
+
+Use a custom format including:
+
+Logger name
+
+Level
+
+Message
+========================================================================
+Exercise 3: Multiple Loggers
+
+Goal: Use multiple loggers in the same application.
+
+Task:
+
+Create two loggers:
+
+auth_logger
+
+payment_logger
+
+Log:
+
+Login success and failure using auth_logger
+
+Payment success and failure using payment_logger
+
+Each logger should:
+
+Use a different log level
+
+Write to a separate log file
