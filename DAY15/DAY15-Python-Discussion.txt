@@ -1,0 +1,590 @@
+import logging
+
+logging.basicConfig(level=logging.DEBUG,format='%(asctime)s - %(levelname)s - %(message)s')
+
+def method_operation(v):
+	if v < 0:
+		raise ValueError('Value - Not matched')
+	else:
+		logging.info('Operations is done') # normal execution
+
+
+try:
+	var = input('Enter some value:')
+	method_operation(int(var))
+except ValueError as eobj:
+	logging.exception("Exception occurred:%s",str(eobj))
+
+################
+
+1st - Database - emp.db
+	|->Table - Eid,Name,Dept
+	|
+	read an emp.csv file 
+		- read line by line
+		- split each line into multiple values based on ,
+		- insert data - (empID,empName,empDEPT) to DB
+	|
+	fetch the data from DB ->Write to separate log file with timestamp.
+
++----------+
+| DB       | ------------->[ Python ]
++----------+	     	    - .... ==========[ result.log ]													|--->empID:empName:empDEPT:<TimeStamp>
+
+=======================
+
+import sqlite3
+conn = sqlite3.connect('emp.db')
+sth = conn.cursor()
+sth.execute('''create table emp (eid INT,
+            ename TEXT,
+            edept TEXT)''')
+
+with open("emp.csv") as fobj:
+	for var in fobj:
+		eid,ename,edept,eplace,ecost = var.split(",")
+		sth.execute("insert into emp (eid,ename,edept) values(?,?,?)",(eid,ename,edept)
+		
+conn.commit()
+with open("e1.log","w") as wobj:
+	sth.execute("select *from emp")
+	for v in sth: # generator
+		wobj.write(f"{v[0]}:{v[1]}:{v[-1]}\n") # write to log file
+
+conn.close()
+
+======================
+
+Write a Python program:
+ - sqlite3 - emp.db 
+	     =======
+ - read emp.csv file ->insert all emp records to emp.db file
+ - fetches all emp records
+ |
+ - logs
+     ->Start and end
+     ->DB Connection ->Table Creation ->Data insertion ->retrieval ->Error 
+- App.log file
+  -Log level INFO and ERROR
+  -Log format
+	 |->Time Log level Message
+
+
+######################################################################################################
+
+Python Unit Testing
+--------------------
+Unit Testing - Small pieces of code(function/class) 
+			       --------------------//working correctly or not ?
+ 
+refactoring the code
+ 
+unit - function/method/class 
+==== 
+
+---------------------------+
+def calc_add(a,b):
+	return a+b
+---------------------------+
+# 1 unit
+
+unittest
+pytest
+----------//python std unit test module
+
+unittest module
+|->oops style 
+
+class Test_(unittest.TestCase):
+	def test_....(self):
+		..
+		
+assert
+|
+assertEquals(unit_method(a1,a2),result) => assertEquals(cal_add(4,5),9) # OK
+
+filename: test_<....>.py  (ex: test_calc_util.py)
+
+
+file: demo53.py
++------------------------------+
+def calc_add(a,b):
+	return a+b
++------------------------------+
+
+file: test_demo53.py
++-----------------------------+
+ import unittest
+ from demo53 import calc_add
+
+ class Test_demo53_code(unittest.TestCase):
+	def test_calc_add(self):
+		self.assertEqual(calc_add(3,5),8)
+		self.assertEqual(calc_add(3,5),9)
+
+ if __name__ == '__main__':
+	unittest.main()
+
++--------------------------------------------------------+
+ 
+setUp() - test fixture 
+	  ============//before calling the test method - setUp() called.
+
+=======================================================================
+pytest
+------
+->Simple syntax
+->Fixture - setup,teardown,reduce duplication
+->Parameterized test 
+
+->pip install pytest
+
+->filename: test_ 
+->functionName: test_
+->use assertion statement 
+
+file: test_demo55.py
+
+def test_sqrt():
+	n = 25
+	assert math.sqrt(n) == 5
+def test_squre():
+	n = 7
+	assert 7 * 7 = 49
+
+python -m pytest test_demo55.py
+=============================================================
+python -m pytest {Enter}
+
+python -m pytest test_demo* {enter}
+
+# To execute the test contains a pattern/string in its name 
+#
+# pytest -k <pattern/string> -v 
+#
+
+python -m pytest -k square -v {enter}
+=============================================================
+PS C:\Users\karth\Karthik\UST-Global-Training\DAY15> & C:/Users/karth/AppData/Local/Programs/Python/Python310/python.exe c:/Users/karth/Karthik/UST-Global-Training/DAY15/test_demo56.py
+PS C:\Users\karth\Karthik\UST-Global-Training\DAY15> 
+PS C:\Users\karth\Karthik\UST-Global-Training\DAY15> pytest
+=========================================== test session starts ===========================================
+platform win32 -- Python 3.10.0, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\Users\karth\Karthik\UST-Global-Training\DAY15
+plugins: anyio-4.10.0, langsmith-0.4.34
+collected 7 items                                                                                          
+
+test_demo53.py .                                                                                     [ 14%]
+test_demo54.py F                                                                                     [ 28%]
+test_demo55.py .                                                                                     [ 42%] 
+test_demo56.py .F.F                                                                                  [100%] 
+
+================================================ FAILURES ================================================= 
+________________________________________ test_myclass.test_method1 ________________________________________ 
+
+self = <test_demo54.test_myclass testMethod=test_method1>
+
+    def test_method1(self):
+        result = self.a + self.b
+>       self.assertTrue(result==300)
+E       AssertionError: False is not true
+
+test_demo54.py:10: AssertionError
+------------------------------------------ Captured stdout call ------------------------------------------- 
+end of the testcase
+_______________________________________________ test_squre ________________________________________________ 
+
+    def test_squre():
+        n = 7
+>       assert 7 * 7 == 67
+E    assert (7 * 7) == 67
+
+test_demo56.py:7: AssertionError
+_____________________________________________ test_calc_code ______________________________________________ 
+
+    def test_calc_code():
+>       assert 500 < 400
+E       assert 500 < 400
+
+test_demo56.py:12: AssertionError
+========================================= short test summary info ========================================= 
+FAILED test_demo54.py::test_myclass::test_method1 - AssertionError: False is not true
+FAILED test_demo56.py::test_squre - assert (7 * 7) == 67
+FAILED test_demo56.py::test_calc_code - assert 500 < 400
+======================================= 3 failed, 4 passed in 0.25s ======================================= 
+PS C:\Users\karth\Karthik\UST-Global-Training\DAY15> python -m pytest .\test_demo56   
+=========================================== test session starts ===========================================
+platform win32 -- Python 3.10.0, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\Users\karth\Karthik\UST-Global-Training\DAY15
+plugins: anyio-4.10.0, langsmith-0.4.34
+collected 0 items                                                                                           
+
+========================================== no tests ran in 0.01s ========================================== 
+ERROR: file or directory not found: .\test_demo56
+
+PS C:\Users\karth\Karthik\UST-Global-Training\DAY15> python -m pytest .\test_demo56.py
+=========================================== test session starts ===========================================
+platform win32 -- Python 3.10.0, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\Users\karth\Karthik\UST-Global-Training\DAY15
+plugins: anyio-4.10.0, langsmith-0.4.34
+collected 4 items                                                                                          
+
+test_demo56.py .F.F                                                                                  [100%]
+
+================================================ FAILURES =================================================
+_______________________________________________ test_squre ________________________________________________ 
+
+    def test_squre():
+        n = 7
+>       assert 7 * 7 == 67
+E    assert (7 * 7) == 67
+
+test_demo56.py:7: AssertionError
+_____________________________________________ test_calc_code ______________________________________________ 
+
+    def test_calc_code():
+>       assert 500 < 400
+E       assert 500 < 400
+
+test_demo56.py:12: AssertionError
+========================================= short test summary info ========================================= 
+FAILED test_demo56.py::test_squre - assert (7 * 7) == 67
+FAILED test_demo56.py::test_calc_code - assert 500 < 400
+======================================= 2 failed, 2 passed in 0.21s ======================================= 
+PS C:\Users\karth\Karthik\UST-Global-Training\DAY15> python -m pytest .\test_demo56.py -k calc
+=========================================== test session starts ===========================================
+platform win32 -- Python 3.10.0, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\Users\karth\Karthik\UST-Global-Training\DAY15
+plugins: anyio-4.10.0, langsmith-0.4.34
+collected 4 items / 2 deselected / 2 selected                                                              
+
+test_demo56.py .F                                                                                    [100%]
+
+================================================ FAILURES ================================================= 
+_____________________________________________ test_calc_code ______________________________________________ 
+
+    def test_calc_code():
+>       assert 500 < 400
+E       assert 500 < 400
+
+test_demo56.py:12: AssertionError
+========================================= short test summary info ========================================= 
+FAILED test_demo56.py::test_calc_code - assert 500 < 400
+================================ 1 failed, 1 passed, 2 deselected in 0.19s ================================ 
+PS C:\Users\karth\Karthik\UST-Global-Training\DAY15> 
+
+#############################
+pytest markers 
+	|->skip,xfail,parametrize 
+
+@pytest.mark.<markerName>
+
+
+file: test_demo57.py
+
+import pytest
+@pytest.mark.calc
+def test_calc_code():
+	n = 150
+	assert n >100
+
+@pytest.mark.calc
+def test_calc_step():
+	n = 200
+	assert n <= 300
+
+ 
+@pytest.mark.sample
+def test_equality():
+	assert 10 == 11
+
+----------------------------------------------------------
+pytest -m sample -v  {enter}
+
+
+PS C:\Users\karth\Karthik\UST-Global-Training\DAY15> python -m pytest -m sample  .\test_demo57.py  
+=========================================== test session starts ===========================================
+platform win32 -- Python 3.10.0, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\Users\karth\Karthik\UST-Global-Training\DAY15
+plugins: anyio-4.10.0, langsmith-0.4.34
+collected 3 items / 2 deselected / 1 selected                                                              
+
+test_demo57.py F                                                                                     [100%]
+
+================================================ FAILURES ================================================= 
+______________________________________________ test_equality ______________________________________________ 
+
+    @pytest.mark.sample
+    def test_equality():
+>       assert 10 == 11
+E    assert 10 == 11
+
+test_demo57.py:16: AssertionError
+============================================ warnings summary ============================================= 
+test_demo57.py:3
+  C:\Users\karth\Karthik\UST-Global-Training\DAY15\test_demo57.py:3: PytestUnknownMarkWarning: Unknown pytest.mark.calc - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.calc
+
+test_demo57.py:8
+  C:\Users\karth\Karthik\UST-Global-Training\DAY15\test_demo57.py:8: PytestUnknownMarkWarning: Unknown pytest.mark.calc - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.calc
+
+test_demo57.py:14
+  C:\Users\karth\Karthik\UST-Global-Training\DAY15\test_demo57.py:14: PytestUnknownMarkWarning: Unknown pytest.mark.sample - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.sample
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================================= short test summary info ========================================= 
+FAILED test_demo57.py::test_equality - assert 10 == 11
+=============================== 1 failed, 2 deselected, 3 warnings in 0.16s =============================== 
+PS C:\Users\karth\Karthik\UST-Global-Training\DAY15> python -m pytest -m sample -v               
+=========================================== test session starts ===========================================
+platform win32 -- Python 3.10.0, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\karth\AppData\Local\Programs\Python\Python310\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\karth\Karthik\UST-Global-Training\DAY15
+plugins: anyio-4.10.0, langsmith-0.4.34
+collected 10 items / 9 deselected / 1 selected                                                             
+
+test_demo57.py::test_equality FAILED                                                                 [100%]
+
+================================================ FAILURES ================================================= 
+______________________________________________ test_equality ______________________________________________ 
+
+    @pytest.mark.sample
+    def test_equality():
+>       assert 10 == 11
+E    assert 10 == 11
+
+test_demo57.py:16: AssertionError
+============================================ warnings summary ============================================= 
+test_demo57.py:3
+  C:\Users\karth\Karthik\UST-Global-Training\DAY15\test_demo57.py:3: PytestUnknownMarkWarning: Unknown pytest.mark.calc - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.calc
+
+test_demo57.py:8
+  C:\Users\karth\Karthik\UST-Global-Training\DAY15\test_demo57.py:8: PytestUnknownMarkWarning: Unknown pytest.mark.calc - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.calc
+
+test_demo57.py:14
+  C:\Users\karth\Karthik\UST-Global-Training\DAY15\test_demo57.py:14: PytestUnknownMarkWarning: Unknown pytest.mark.sample - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.sample
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================================= short test summary info ========================================= 
+FAILED test_demo57.py::test_equality - assert 10 == 11
+=============================== 1 failed, 9 deselected, 3 warnings in 0.23s =============================== 
+PS C:\Users\karth\Karthik\UST-Global-Training\DAY15> python -m pytest -m calc -v  
+=========================================== test session starts ===========================================
+platform win32 -- Python 3.10.0, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\karth\AppData\Local\Programs\Python\Python310\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\karth\Karthik\UST-Global-Training\DAY15
+plugins: anyio-4.10.0, langsmith-0.4.34
+collected 10 items / 8 deselected / 2 selected                                                             
+
+test_demo57.py::test_calc_code PASSED                                                                [ 50%] 
+test_demo57.py::test_calc_step PASSED                                                                [100%] 
+
+============================================ warnings summary ============================================= 
+test_demo57.py:3
+  C:\Users\karth\Karthik\UST-Global-Training\DAY15\test_demo57.py:3: PytestUnknownMarkWarning: Unknown pytest.mark.calc - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.calc
+
+test_demo57.py:8
+  C:\Users\karth\Karthik\UST-Global-Training\DAY15\test_demo57.py:8: PytestUnknownMarkWarning: Unknown pytest.mark.calc - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.calc
+
+test_demo57.py:14
+  C:\Users\karth\Karthik\UST-Global-Training\DAY15\test_demo57.py:14: PytestUnknownMarkWarning: Unknown pytest.mark.sample - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.sample
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== 2 passed, 8 deselected, 3 warnings in 0.03s =============================== 
+PS C:\Users\karth\Karthik\UST-Global-Training\DAY15> 
+
+#######################################################################################################
+
+Fixtures
+---------
+ ->functions
+
+@pytest.fixture
+def f1():
+    n = 50
+    return n
+
+def test_f1(f1):
+    assert f1 == 50
+
+def test_f2(f1):
+    assert f1 % 3 == 0
+
+
+@pytest.fixture
+def sample_data:
+   return [10,20,30,40]
+
+def test_list_length(sample_data):
+	assert len(sample_data) == 4
+
+============================================================================================
+
+file: test_demo57.py
+----------------------------------------------------------------
+@pytest.fixture
+def f1():
+    n = 50
+    return n
+
+def test_f1(f1):
+    assert f1 == 50
+
+def test_f2(f1):
+    assert f1 % 3 == 0
+
+
+@pytest.fixture
+def sample_data:
+   return [10,20,30,40]
+
+def test_list_length(sample_data):
+	assert len(sample_data) == 4
+----------------------------------------------------------------
+
+file: test_ab.py
+---------------
+import pytest
+@pytest.fixture
+def f1():
+    n = 50
+    return n
+
+--------------------
+file: test_demo58.py
+----------------------------------------------------------------
+from ...
+def test_f1(f1):
+    assert f1 == 50
+
+def test_f2(f1):
+    assert f1 % 3 == 0
+
+
+@pytest.fixture
+def sample_data:
+   return [10,20,30,40]
+
+def test_list_length(sample_data):
+	assert len(sample_data) == 4
+----------------------------------------------------------------
+
+file: conftest.py <==
+=--------------------
+import pytest
+@pytest.fixture
+def f1():
+	n = 50
+	return n
+-----------------------
+file: test_one.py
+
+import pytest
+def test_method1(f1):
+	assert f1 % 5 == 0
+
+file: test_two.py
+def test_method2(f1):
+	assert f1 % 6 == 0
+------------------------------
+
+#######################################################
+
+def calc(a1,a2):
+	return a1+a2
+
+calc(10,20)
+calc(100,200)
+calc(120,30)
+
+#######################################################
+
+def test_one():
+	assert 10+20 == 30
+
+def test_two():
+	assert 100+200 == 300
+
+def test_three():
+	assert 120+30  == 150
+
+
+############ Vs
+
+import pytest
+@pytest.mark.parametrize("a,b,expected",
+ [ (10,20,30),(100,200,300),(120,30,150)])
+
+def test_calc(a,b,expected):
+	assert a+b == expected 
+
+----------------------------------------------------
+
+when should use parametrized test
+---------------------------------
+ |->Same logic
+ |->Different inputs 
+
+###########################################################################
+refactoring 
+|
+PEP8
+-----
+
+total_cost = principal_cost +
+interest_cost + processing_cost + tax_amount
+-------------------------------------------------// X
+
+total_cost =(
+principal_cost 
++interest_cost
++processing_cost
++tax_amount
+)
+
+
+totalcost=1000 X
+Vs
+total_cost = 1000  (OK)
+
+
+class box:
+	pass
+
+class Box:
+	pass
+
+class Box:
+	def start_operation(self):
+		pass
+
+
+importing modules
+1. Standard library
+2. Third-party libraries 
+3. local imports 
+
+ex:
+---
+import os
+import sys
+import pytest
+from project.calculator import calc_addition
+
+-----------------------------------------------//OK
+
+
+
+
+
+							
+
+
