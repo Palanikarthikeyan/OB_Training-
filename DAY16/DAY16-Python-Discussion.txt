@@ -1,0 +1,412 @@
+Recap
+------
+python programming - direct approach - procedure style code
+		   - object oriented style approach - class<-->object
+		   - functional programming -- expression (or) single line code style
+|
+python --- database
+python --- os commands
+python --- logging
+python --- testing 
+python .... ..
+	    python_modules are available
+######################################################
+json
+requests
+|
+WebFrameWork - WebApplication 
+
+Client ------>-------request-------->-----------Webserver------->---ServerCode
+								 ...
+		---------------<----------------------------------
+				response 
+				 |-> 1. Webpage response <html>+{{data}}</html>
+				 |-> 2. Data response - data only there is no <html>..</html> - JSON
+
+
+JSON
+-----
+ |-> Store data - Exchange the data between WebApplication
+     |___________________|
+
+
+>>> d={"IP":["10.20.30.40","10.23.45.45","10.20.44.34"],
+... "interface":["eth0","eth1","eth2","lo"],
+... "config_file":{'F1':"net.cfg",'F2':"info.cfg"}}
+>>>
+>>> print(type(d))
+<class 'dict'>
+>>> print(d)
+{'IP': ['10.20.30.40', '10.23.45.45', '10.20.44.34'], 'interface': ['eth0', 'eth1', 'eth2', 'lo'], 'config_file': {'F1': 'net.cfg', 'F2': 'info.cfg'}}
+>>>
+>>> import pprint
+>>> pprint.pprint(d)
+{'IP': ['10.20.30.40', '10.23.45.45', '10.20.44.34'],
+ 'config_file': {'F1': 'net.cfg', 'F2': 'info.cfg'},
+ 'interface': ['eth0', 'eth1', 'eth2', 'lo']}
+>>>
+
+
+>>> d={"IP":["10.20.30.40","10.23.45.45","10.20.44.34"],
+... "interface":["eth0","eth1","eth2","lo"],
+... "config_file":{'F1':"net.cfg",'F2':"info.cfg"}}
+>>>
+>>> print(type(d))
+<class 'dict'>
+>>> print(d)
+{'IP': ['10.20.30.40', '10.23.45.45', '10.20.44.34'], 'interface': ['eth0', 'eth1', 'eth2', 'lo'], 'config_file': {'F1': 'net.cfg', 'F2': 'info.cfg'}}
+>>>
+>>> import pprint
+>>> pprint.pprint(d)
+{'IP': ['10.20.30.40', '10.23.45.45', '10.20.44.34'],
+ 'config_file': {'F1': 'net.cfg', 'F2': 'info.cfg'},
+ 'interface': ['eth0', 'eth1', 'eth2', 'lo']}
+>>>
+>>> import json
+>>> json.dumps(d)
+'{"IP": ["10.20.30.40", "10.23.45.45", "10.20.44.34"], "interface": ["eth0", "eth1", "eth2", "lo"], "config_file": {"F1": "net.cfg", "F2": "info.cfg"}}'
+>>>
+>>> json.dumps(d,indent=2)
+'{\n  "IP": [\n    "10.20.30.40",\n    "10.23.45.45",\n    "10.20.44.34"\n  ],\n  "interface": [\n    "eth0",\n    "eth1",\n    "eth2",\n    "lo"\n  ],\n  "config_file": {\n    "F1": "net.cfg",\n    "F2": "info.cfg"\n  }\n}'
+>>>
+>>> print(json.dumps(d,indent=2))
+{
+  "IP": [
+    "10.20.30.40",
+    "10.23.45.45",
+    "10.20.44.34"
+  ],
+  "interface": [
+    "eth0",
+    "eth1",
+    "eth2",
+    "lo"
+  ],
+  "config_file": {
+    "F1": "net.cfg",
+    "F2": "info.cfg"
+  }
+}
+>>> print(json.dumps(d,indent=5))
+{
+     "IP": [
+          "10.20.30.40",
+          "10.23.45.45",
+          "10.20.44.34"
+     ],
+     "interface": [
+          "eth0",
+          "eth1",
+          "eth2",
+          "lo"
+     ],
+     "config_file": {
+          "F1": "net.cfg",
+          "F2": "info.cfg"
+     }
+}
+>>> json_obj = json.dumps(d,indent=2)
+>>>
+>>> python_Data = json.loads(json_obj)
+>>>
+>>> type(python_Data)
+<class 'dict'>
+>>>
+>>> pprint.pprint(python_Data)
+{'IP': ['10.20.30.40', '10.23.45.45', '10.20.44.34'],
+ 'config_file': {'F1': 'net.cfg', 'F2': 'info.cfg'},
+ 'interface': ['eth0', 'eth1', 'eth2', 'lo']}
+>>>
+
+
+
+>>>
+>>> with open("test.json","w") as wobj:
+...     json.dump(python_Data,wobj) # writing to json_file
+...
+>>>
+>>> with open("test.json","r") as fobj:
+...     python_data = json.load(fobj)
+...
+>>>
+>>> type(python_data)
+<class 'dict'>
+>>> python_data
+{'IP': ['10.20.30.40', '10.23.45.45', '10.20.44.34'], 'interface': ['eth0', 'eth1', 'eth2', 'lo'], 'config_file': {'F1': 'net.cfg', 'F2': 'info.cfg'}}
+>>>
+>>>
+
+requests
+
+>>> import requests
+>>>
+>>> requests.get('https://www.google.com')
+<Response [200]>
+>>>
+>>> r = requests.get('https://www.google.com')
+>>>
+>>> r.status_code
+200
+>>> r.headers
+{'Date': 'Wed, 14 Jan 2026 13:49:33 GMT', 'Expires': '-1', 'Cache-Control': 'private, max-age=0', 'Content-Type': 'text/html; charset=ISO-8859-1', 'Content-Security-Policy-Report-Only': "object-src 'none';base-uri 'self';script-src 'nonce-mHapTjSOXwynEZJnRBLJow' 'strict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:;report-uri https://csp.withgoogle.com/csp/gws/other-hp", 'Accept-CH': 'Sec-CH-Prefers-Color-Scheme', 'P3P': 'CP="This is not a P3P policy! See g.co/p3phelp for more info."', 'Content-Encoding': 'gzip', 'Server': 'gws', 'X-XSS-Protection': '0', 'X-Frame-Options': 'SAMEORIGIN', 'Set-Cookie': '__Secure-STRP=AD6DogsX3tcbHdWaPo2StP9j9igBzWjfKlEonbCrsU0Ck_5Z8qZV_GobXIX1kMNj-NninWS4IbEHmcaB-lfwWtFciqAysz-3JcIH; expires=Wed, 14-Jan-2026 13:54:33 GMT; path=/; domain=.google.com; Secure; SameSite=strict, AEC=AaJma5tGSuS4xlcK3TIxF0LqlzHRu711Ybo5BKB0SILDIvu6ajlTUJIPIw; expires=Mon, 13-Jul-2026 13:49:33 GMT; path=/; domain=.google.com; Secure; HttpOnly; SameSite=lax, NID=528=XV1sJ1WGOp-Dt0agmh9u41qZztYjmPyttck5ueWl2I1rbHeRa908kvhqUr9itkyuKR0b7EF2pWh3RocDreK4Do-SIfT8iQizAsdjtT_8cyrFdf81bDGcT3dvtwzf5iMe1SuKTtrUsT3QA6DW5H_83Z1tACzqJEGu9T_xDV_cJ4UFhU5vofpL54tUowNA0aC0No39JmBbCDGHLN7uEpA1ikHVtrPAypiw; expires=Thu, 16-Jul-2026 13:49:33 GMT; path=/; domain=.google.com; HttpOnly, __Secure-BUCKET=CNAE; expires=Mon, 13-Jul-2026 13:49:33 GMT; path=/; domain=.google.com; Secure; HttpOnly', 'Alt-Svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'Transfer-Encoding': 'chunked'}
+>>>
+>>>
+>>> r.headers['Content-Type']
+'text/html; charset=ISO-8859-1'
+>>>
+>>> web_page = r.text
+>>>
+>>> type(web_page)
+<class 'str'>
+>>>
+>>> len(web_page)
+19774
+>>> with open("Test.html","w") as wobj:
+...     wobj.write(web_page)
+...
+19774
+>>>
+
+
+import requests
+
+requests.get(URL) ->status_code
+
+r = requests.get(URL)
+
+r.headers ->URL_header details ->dict 
+
+data = r.text # To get the webcontent
+----
+
+####
+>>> r = requests.get("https://api.github.com/users/hadley/orgs")
+>>>
+>>> r.status_code
+200
+>>>
+>>> r.headers['Content-Type']
+'application/json; charset=utf-8'
+>>>
+>>> jd = r.text
+>>>
+>>> python_d1 = json.loads(jd)
+>>>
+>>> requests.json(jd)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: module 'requests' has no attribute 'json'
+>>>
+>>> type(python_d1)
+<class 'list'>
+>>>
+>>> type(python_d1[0])
+<class 'dict'>
+>>>
+>>> python_d1[0].keys()
+dict_keys(['login', 'id', 'node_id', 'url', 'repos_url', 'events_url', 'hooks_url', 'issues_url', 'members_url', 'public_members_url', 'avatar_url', 'description'])
+####
+
+Webframework
+-------------
+ |->Software framework - web applications(WebSite,APIs,backend services) 
+ 
+ |->request/response handling 
+
+ |->Security 
+
+ |->Database Integration 
+
+
+Django
+Flask
+FastAPI - Modern,very fast,async supports 
+Pyramid 
+
+-------------
+Flask
+|
+|->Light weight Python WebFramework ->WebApplication and REST APIs.
+
+|-> URL Routing
+|-> Request and Response 
+|-> jinja2 <-- templateCode {{template_placeholder}} <-- dynamic content + <html>
+|-> WSGI 
+
+
+vitrual env 
+---------------//
+=======================
+C:\Users\karth>python -m venv lab1
+
+C:\Users\karth>lab1\Scripts\activate
+
+(lab1) C:\Users\karth>deactivate
+C:\Users\karth>
+C:\Users\karth>lab1\Scripts\activate
+
+(lab1) C:\Users\karth>python
+Python 3.10.0 (tags/v3.10.0:b494f59, Oct  4 2021, 19:00:18) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import flask
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'flask'
+>>>
+>>> exit()
+
+(lab1) C:\Users\karth>pip install flask
+Collecting flask
+  Using cached flask-3.1.2-py3-none-any.whl (103 kB)
+Collecting jinja2>=3.1.2
+  Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+Collecting blinker>=1.9.0
+  Using cached blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Collecting itsdangerous>=2.2.0
+  Using cached itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+Collecting werkzeug>=3.1.0
+  Downloading werkzeug-3.1.5-py3-none-any.whl (225 kB)
+     |████████████████████████████████| 225 kB 2.2 MB/s
+Collecting click>=8.1.3
+  Using cached click-8.3.1-py3-none-any.whl (108 kB)
+Collecting markupsafe>=2.1.1
+  Using cached markupsafe-3.0.3-cp310-cp310-win_amd64.whl (15 kB)
+Collecting colorama
+  Using cached colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Installing collected packages: markupsafe, colorama, werkzeug, jinja2, itsdangerous, click, blinker, flask
+Successfully installed blinker-1.9.0 click-8.3.1 colorama-0.4.6 flask-3.1.2 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 werkzeug-3.1.5
+WARNING: You are using pip version 21.2.3; however, version 25.3 is available.
+You should consider upgrading via the 'C:\Users\karth\lab1\Scripts\python.exe -m pip install --upgrade pip' command.
+
+(lab1) C:\Users\karth>python
+Python 3.10.0 (tags/v3.10.0:b494f59, Oct  4 2021, 19:00:18) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+>>> import flask
+>>> exit()
+
+(lab1) C:\Users\karth>
+
+####################################################################
+
+import flask		<== (1)
+
+flask.Flask(__name__) ->app_object  <==(2)
+	|		
+	className 
+
+
+route decorator - we can create more function	<==(3)
+					|->Webpage/API
+	
+To start webApplication - app_object.run() from current module  <== (4) <-- final step
+
+
+Under development
+-------------------
+ ->each change in the code ->enable debug support (debug=True) //
+
+
+url_for() - dynamically building a URL
+|
+redirect() 
+
+return redirect(url_for('functionName',args))
+	========        -------------------
+
+project_name/
+	|---->app.py
+	|	|		
+	|---->templates/ 
+		   |--->filename.html
+
+
+@app_obj.route("/")
+def f1():
+	return "<h1>Welcome to Flask App</h1>"
+	Vs
+	return render_template('display.html')
+				|
+				templates/
+					display.html
+					------------
+	
+
+download ->google.com page content - requests module
+					|->write webcontent to templates/index.html
+
+/mypage 
+    ----->render_template(index.html)
+			    |->Google.com content
+
+--------------------------------------------------------------------
+
+display.html
+
+<html>
+<head>
+..
+<h1>server name is:{{server_name}}</h1>
+
+jinja2 templateCode - dynamic 
+
+{{placeholder}}
+
+{% if condition %}
+  {{block}}
+{% endif %}
+
+
+{% for var in <collection> %}
+
+{% endfor %}
+
+
+{# .... #} - comments 
+
+------------------------------------------
+contactus/<mobileNumber>
+		|<=== URL input (1)
+		|
+def fx(<mobileNumber>)
+		| (2)
+		render_template('result.html',result=<mobileNumber>)
+						|      (3)
+						|
+					   file: view.html
+						  |
+						{{result}} <--- View 
+						   (4)
+
+
+-------------------------------------------------------
+
+>>>
+>>> import requests
+>>>
+>>>
+>>> r = requests.get("http://127.0.0.1:5000/contact/9494002")
+>>>
+>>> r.status_code
+200
+>>>
+>>> r.headers
+{'Server': 'Werkzeug/3.1.5 Python/3.10.0', 'Date': 'Wed, 14 Jan 2026 15:57:16 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '130', 'Connection': 'close'}
+>>>
+>>>
+>>> r = requests.get("http://127.0.0.1:5000/data")
+>>>
+>>> r.headers
+{'Server': 'Werkzeug/3.1.5 Python/3.10.0', 'Date': 'Wed, 14 Jan 2026 16:00:00 GMT', 'Content-Type': 'application/json', 'Content-Length': '207', 'Connection': 'close'}
+>>>
+>>>
+
+<form action = 
+
+
+(submit)
+    |---------------------->http://localhost:5000
+			    http://localhost:5000/mypage  method="post"
+							
+###########################################################################################################
+
