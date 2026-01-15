@@ -1,0 +1,236 @@
+project/
+     --- app.py
+     --- templates/
+	      - index.html
+	      - ...
+     --- file.db
+     ---
+
+127.0.0.1:5000  --> / 
+
+https://www.python.org  /
+https://www.google.com  /
+
+
+https://www.python.org/docs  -->  /docs 
+
+#######################################################################
+
+ Enrollment.html                                            app.py
++-------------+                                        +-------------+
+|             |                                        |  ========== |
+|             | -----------(submit)-------->-----------|  | K  | V  ||
++-------------+                                        |  -----------|
+                                                       |       |--------->-----insert into Database     *                 
+                                                       +-------------+   ----<---- fetch the data from DB
+ 											& display to page
+
+# Create database file emp.db
+# 
+# create emp table 
+# 
+# close the database connection 
+# ---------------------------------//Execute this file only onetime
+
+app.py
+-------
+*
+with sqlite3.connect("emp.db") as con:
+	cur = con.cursor()
+	cur.execute("insert into emp(name,dob) values(?,?)",(emp_name,emp_dob))
+	con.commit()
+	..
+
+@app.route("/display")
+def fx():
+   conn = sqlite3.connect("emp.db")
+   cur = conn.cursor()
+   cur.execute("select *from emp")
+   records = cur.fetchall()
+   return render_template("display.html",temp_records=records)
+				|
+
+			templates/
+				|-->records.html
+					...
+					....
+#################################################################################################
+
+
+import sqlite3
+
+conn = sqlite3.connect("emp.db")
+
+conn.execute("create table emp(name TEXT,dob TEXT)")
+conn.close()
+
+
+=========================================================
+
+emp_enrollment
+ --
+ --
+ --
+ |
+(submit)
+
+=======================================================================================================
+asyncio 
+|->python library 
+
+
+request ->download() 
+             |->process()
+                   |->uploading()
+
+
+
+async def fx():
+      .....
+
+import asyncio
+
+async def fx():
+	print("This is ")
+	await asyncio.sleep(1)
+	print("asynchronous programming")
+	await asyncio.sleep(1)
+	print("and this is not multi-threading Single Thread")
+
+
+asyncio.run(fx())
+
+#####################################################################
+
+Fast API
+--------
+python 3.6 -> type hint
+
+def fx(int: a) -> str:
+	..
+	return str(a)
+
+fx(10)
+
+
+pip install fastapi
+
+Uvicorn 
+
+pip install uvicorn 
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+async def fx():
+	return ....
+
+if __name__ == '__main__':
+	uvicorn.run("main.app",reload=True)
+
+
+Unlike the Flask framework, FastAPI doesnt contain any built-in developement server. We need uvicorn.
+uvicorn --> Asynchronous Server Gateway Interface (ASGI)
+-------
+Vs
+Flask --> WSGI - not suitable for asyncio application
+
+(lab1) C:\Users\karth\Karthik\UST-Global-Training\DAY17>python -m uvicorn app5:app --reload
+INFO:     Will watch for changes in these directories: ['C:\\Users\\karth\\Karthik\\UST-Global-Training\\DAY17']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [26276] using StatReload
+INFO:     Started server process [25308]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+
+
+(or)
+File: app6.py
+----------------
+import uvicorn
+import fastapi
+app = fastapi.FastAPI()
+
+@app.get("/")
+async def f1():
+    return {"Key1":"Welcome to FastAPI"}
+
+if __name__ == '__main__':
+    uvicorn.run("app6:app",reload=True)
+
+
+#################################################################
+
+Typehint
+
+
+python is dynamictype programming
+	  ------------
+
+
+http://127.0.0.1:8000/mypage?n=demo&c=345
+			    |=============
+			    |  Query parameters - input parameters
+						   |->typehints
+========================================================================
+
+
+FastAPI default response is JSONResponse 
+|
+Supports html - webpage 
+------------
+
+Returns - webpage
+
+from fastapi.reponses import HTMLResponse
+
+app = FastAPI()
+
+@app.get("/")
+asnyc def f1():
+      return "<h1>Hello FastAPI</h1>"
+
+##### Vs
+
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse 
+
+app = FastAPI()
+
+@app.get("/",response_class = HTMLResponse)
+def f1():
+	return "<h1>Hello FastAPI</h1>"
+
+ 
+##########################################################
+
+project/
+    -- app.py
+    -- templates/
+	   -- file.html
+	      ==========
+
+
+from fastapi.templating import Jinja2Templates
+
+templates = Jinja2Templates(directory="templates")
+
+def fx(request: Requests):
+	return templates.TemplateResponse("file.html",{"title":"FastAPI"})
+
+						|
+			file: file.html
+			--------------
+			<html>
+			<head>
+			<title>{{title}}</title>
+			<body>
+			..
+			</body>
+			</html>
+			--------------------------
+
+
+#####################################################################################################
