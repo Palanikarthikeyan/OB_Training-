@@ -1,0 +1,178 @@
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return {"message": "Hello Flask"}
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+###########
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def hello():
+    return {"message": "Hello FastAPI"}
+###########
+
+Title: Simple Calculator API (Flask)
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route("/add")
+def add():
+    a = int(request.args.get("a"))
+    b = int(request.args.get("b"))
+    return {"result": a + b}
+
+app.run(debug=True)
+
+Simple Calculator API (FastAPI)
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/add")
+def add(a: int, b: int):
+    return {"result": a + b}
+---------------------------------------------
+Title: User CRUD API (FastAPI + SQLite)
+
+import sqlite3
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class User(BaseModel):
+    name: str
+    age: int
+
+@app.post("/users")
+def create_user(user: User):
+    conn = sqlite3.connect("users.db")
+    conn.execute("CREATE TABLE IF NOT EXISTS users (name, age)")
+    conn.execute("INSERT INTO users VALUES (?,?)", (user.name, user.age))
+    conn.commit()
+    conn.close()
+    return user
+####################################################################################
+
+REST API
+----
+REpresentational State Transfer - REST API - allows two systems to communicate over HTTP 
+
+requests.get() 
+requests.post()
+requests.put()
+requests.delete()
+
+resource - object - Emp Application - Emp 
+		    Product Application - Product
+			..		- 
+
+GET   - Read/fetch the data 	-	200
+
+POST  - Create a data		-	201	
+
+PUT  - Update the data		
+
+PATCH - Update partial data
+
+DELETE - Remove data
+
+data - json data - object/array
+----
+
+404 - Not found
+401 - Unauthorized
+400 - Badrequest
+500 - ServerError
+
+
+
+app = FastAPI()
+
+@app.get()
+
+@app.post()
+
+@app.put()
+
+@app.patch()
+
+@app.delete()
+
+
+
+http://127.0.0.1:8000/docs
+
+########################################################
+
+from fastapi import FastAPI
+
+from pydantic import BaseModel
+
+app = FastAPI()
+
+## Data Model - student
+
+class student_create(BaseModel):
+	name: str
+	...
+
+
+## Create a post
+
+@app.post("/URL")
+def create_user(obj: student_create):
+	obj.add - insert query 
+	..
+	return {}
+
+## Read GET
+
+@app.get("/URL")
+def get_view():
+	return ...
+
+# Update - put
+
+@app.put("/views/{index}")
+def update_student(index: int, student: student_create):
+	students[index] = student
+	..
+	return {}
+
+..
+
+############################################################################################
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
